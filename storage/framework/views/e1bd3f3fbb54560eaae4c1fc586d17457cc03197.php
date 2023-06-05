@@ -1,0 +1,1 @@
+</<?php echo e($field['wrapper']['element'] ?? 'div'); ?>><?php /**PATH /home/dh_ag462h/bereken.webonedevs.com/vendor/backpack/crud/src/resources/views/crud/fields/inc/wrapper_end.blade.php ENDPATH**/ ?>
