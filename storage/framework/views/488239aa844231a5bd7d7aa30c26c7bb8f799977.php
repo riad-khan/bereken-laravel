@@ -1,4 +1,4 @@
-@php
+<?php
     $sql = 'select a.id,a.page_title,c.id as component_id,
         c.meta_title,
         c.meta_description,
@@ -20,39 +20,39 @@
     where b.entity_id = ?';
     
     $seo_social = DB::select($seo_social_sql, [$seo_data[0]->component_id]);
-@endphp
-@section('meta')
+?>
+<?php $__env->startSection('meta'); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ $seo_data[0]->meta_title }} </title>
-    <meta name="description" content="{{ $seo_data[0]->meta_description }}">
-    <meta name="keywords" content="{{ $seo_data[0]->keywords }}">
+    <title><?php echo e($seo_data[0]->meta_title); ?> </title>
+    <meta name="description" content="<?php echo e($seo_data[0]->meta_description); ?>">
+    <meta name="keywords" content="<?php echo e($seo_data[0]->keywords); ?>">
 
-    @foreach ($seo_social as $social_meta)
-        @if ($social_meta->social_network == 'Facebook')
-            <meta property="og:title" content="{{ $social_meta->title }}">
-            <meta property="og:description" content="{{ $social_meta->description }}">
-            <meta property="og:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-            {{-- <meta property="og:url" content="URL of your page">
-<meta property="og:type" content="website"> --}}
-        @else
-            <meta name="twitter:card" content="{{ $social_meta->description }}">
-            <meta name="twitter:title" content="{{ $social_meta->title }}">
-            <meta name="twitter:description" content="{{ $social_meta->description }}">
-            <meta name="twitter:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-        @endif
-    @endforeach
+    <?php $__currentLoopData = $seo_social; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $social_meta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if($social_meta->social_network == 'Facebook'): ?>
+            <meta property="og:title" content="<?php echo e($social_meta->title); ?>">
+            <meta property="og:description" content="<?php echo e($social_meta->description); ?>">
+            <meta property="og:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+            
+        <?php else: ?>
+            <meta name="twitter:card" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:title" content="<?php echo e($social_meta->title); ?>">
+            <meta name="twitter:description" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+        <?php endif; ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-    <link rel="canonical" href="{{ $seo_data[0]->canonical_url }}">
+    <link rel="canonical" href="<?php echo e($seo_data[0]->canonical_url); ?>">
 
     <script>
-        {!! html_entity_decode($seo_data[0]->structured_data) !!}
+        <?php echo html_entity_decode($seo_data[0]->structured_data); ?>
+
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
 <div>
 
-    @php
+    <?php
         $content_sql = 'select 
                         a.page_title,
                         a.id,
@@ -65,22 +65,22 @@
                         left join files e on e.id = c.file_id
                         where a.id = ?';
         $data = DB::select($content_sql, [$seo_data[0]->id]);
-    @endphp
+    ?>
 
     <section class="hero bg-white pt-20 p-4 md:pt-12 md:p-12 w-full items-center mx-auto">
         <div class="container mx-auto max-w-screen-xl">
             <div class="sm:w-[480px] w-full mx-auto px-4 mb-4">
                 <div class="flex items-center">
                     <div class="hidden sm:flex sm:flex-none w-14">
-                        <img src="{{ env('STRAPI_URL') . $data[0]->left_icon }}" alt="icon">
+                        <img src="<?php echo e(env('STRAPI_URL') . $data[0]->left_icon); ?>" alt="icon">
                     </div>
                     <div class="grow text-center">
                         <h1
                             class="text-[#2B313B] font-semibold text-[24px] sm:text-[28px] md:text-[32px] leading-[1.1]">
-                            {{ $data[0]->page_title }}</h1>
+                            <?php echo e($data[0]->page_title); ?></h1>
                     </div>
                     <div class="sm:flex sm:flex-none w-14 hidden">
-                        <img src="{{ env('STRAPI_URL') . $data[0]->right_icon }}" alt="icon">
+                        <img src="<?php echo e(env('STRAPI_URL') . $data[0]->right_icon); ?>" alt="icon">
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
                                 <div class="save-search p-2 relative">
                                     <a onclick="showSearch()"
                                         class="flex justify-between transition-all opacity-100 hover:opacity-90"><img
-                                            src="{{ asset('/frontend/assets/img/save-icon.svg') }}" alt="icon">
+                                            src="<?php echo e(asset('/frontend/assets/img/save-icon.svg')); ?>" alt="icon">
                                         <span class="text-[#26BA65] text-sm font-semibold ml-1 cursor-pointer"> Save
                                             Search</span> </a>
                                     <div
@@ -159,7 +159,7 @@
             </div>
             <!-- services Start -->
 
-            @php
+            <?php
                 $compareSql = 'select 
                             a.name,
                             a.id
@@ -167,8 +167,8 @@
                             where status = 1';
                 
                 $compare_categories = DB::select($compareSql);
-            @endphp
-            @foreach ($compare_categories as $compare_category)
+            ?>
+            <?php $__currentLoopData = $compare_categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $compare_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="services-area compares w-full py-8">
 
 
@@ -176,10 +176,10 @@
 
                     <div class="section-title text-left ">
                         <h2 class="text-2xl font-semibold text-[#2B313B] py-4 sm:pb-6  sm:pt-4">
-                            {{ $compare_category->name }}</h2>
+                            <?php echo e($compare_category->name); ?></h2>
                     </div>
 
-                    @php
+                    <?php
                         $itemsSql = 'select 
                                     b.title,
                                     b.url,
@@ -191,17 +191,17 @@
                                     where a.compare_category_id = ?
                                     order by b.display_order';
                         $compare_items = DB::select($itemsSql, [$compare_category->id]);
-                    @endphp
+                    ?>
 
                     <div class="justify-items-stretch gap-6 grid grid-cols-2 lg:grid-cols-3">
 
-                        @foreach ($compare_items as $item)
+                        <?php $__currentLoopData = $compare_items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <a class="service-btn justify-self-start flex flex-col md:flex-row border border-[#F5F8FF] items-center bg-white text-[#2B313B] grow w-full lg:w-[292px] text-base font-semibold p-[17px] rounded-md hover:text-[#135FFF]"
-                                href="{{ $item->url }}" target="_blank"><img
-                                    src="{{ env('STRAPI_URL') . $item->icon }}" class="mr-0 md:mr-3 h-10 w-10"
+                                href="<?php echo e($item->url); ?>" target="_blank"><img
+                                    src="<?php echo e(env('STRAPI_URL') . $item->icon); ?>" class="mr-0 md:mr-3 h-10 w-10"
                                     alt="icon">
-                                {{ $item->title }}</a>
-                        @endforeach
+                                <?php echo e($item->title); ?></a>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
 
@@ -217,12 +217,13 @@
 
 
                 </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <!-- services End -->
 
         </div>
         <!-- container end -->
     </section>
     <!-- contact-us - start -->
-    {{-- <livewire:components.contact-us /> --}}
+    
 </div>
+<?php /**PATH /home/riad/Documents/bereken-laravel/resources/views/livewire/compares/compares.blade.php ENDPATH**/ ?>

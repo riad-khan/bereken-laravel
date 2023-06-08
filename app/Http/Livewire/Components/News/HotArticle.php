@@ -21,10 +21,24 @@ class HotArticle extends Component
         $this->category = $category;
 
         if ($this->category == 'all') {
-            $articles = DB::select('select a.*,b.category_name,b.slug as category_slug from news a INNER JOIN categories b on a.category_id = b.id where a.hot_article = 1 GROUP by a.id order by a.id DESC limit 5;');
+            $articles = DB::select('select a.*,e.url as thumbnill_image from news a
+
+            left join news_categories_links b on b.news_section_id = a.id
+            left join categories c on c.id = b.category_id
+            left join files_related_morphs d on (d.related_id = a.id and d.field = "news_image")
+            left join files e on e.id = d.file_id
+            where a.hot_article  = 1 group by a.id
+                        order by a.id DESC limit 5');
             $this->hotArticle = $articles;
-        }else{
-            $articles = DB::select('select a.*,b.category_name,b.slug as category_slug from news a INNER JOIN categories b on FIND_IN_SET(b.id,category_id) where FIND_IN_SET('.$this->category.',a.category_id) and a.hot_article = 1  GROUP by a.id order by a.id DESC limit 5');
+        } else {
+            $articles = DB::select('select a.*,e.url as thumbnill_image from news a
+            left join news_categories_links b on b.news_section_id = a.id
+            left join categories c on c.id = b.category_id
+            left join files_related_morphs d on (d.related_id = a.id and d.field = "news_image")
+            left join files e on e.id = d.file_id
+            where a.hot_article = 1 and c.id = ' . $this->category . ' group by a.id
+            
+            order by a.id DESC limit 5');
             $this->hotArticle = $articles;
         }
     }

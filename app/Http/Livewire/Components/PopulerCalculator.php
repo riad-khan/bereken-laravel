@@ -8,17 +8,21 @@ use Livewire\Component;
 class PopulerCalculator extends Component
 {
     public $calculators;
-
+    public $text;
+    public $url;
+    
     public function render()
     {
         return view('livewire.components.populer-calculator');
     }
 
-    public function mount(){
-        $sql = 'select a.* from calculator_lists a INNER join populer_calculators b on a.id = b.calculator_id ORDER by b.display_order;';
+    public function mount($text,$url){
+        $sql = 'select a.id,a.section_title,a.status from populer_calculators a';
 
         $calculators = DB::select($sql);
 
         $this->calculators = $calculators;
+        $this->text = $text;
+        $this->url = $url;
     }
 }

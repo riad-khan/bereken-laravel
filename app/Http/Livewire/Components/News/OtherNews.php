@@ -18,18 +18,25 @@ class OtherNews extends Component
         $data = [];
         $this->category = $category;
         if ($this->category == 'all') {
-            $othersNewsSql = 'select news.*, 
-            GROUP_CONCAT(category_name) as category,
-            categories.slug as category_slug from news 
-            join categories on find_in_set(categories.id, news.category_id) 
-            where news.highlights <> 1 and news.hot_article <> 1 
-            group by news.id ORDER by news.id DESC limit 4'; 
+            $othersNewsSql = 'select a.*,GROUP_CONCAT(DISTINCT c.category_name) as category,e.url as thumbnill_image from news a
+            left join news_categories_links b on b.news_section_id = a.id
+            left join categories c on c.id = b.category_id
+            left join files_related_morphs d on (d.related_id = a.id and d.field="news_image")
+            left join files e on e.id = d.file_id
+            where a.hot_article <> 1 and a.highlights <> 1
+            group by a.id ORDER BY a.id DESC limit 4'; 
             
             $data = DB::select($othersNewsSql);
             $this->otherNews = $data;
         }else{
-            $othersNewsSql = 'select news.*, GROUP_CONCAT(category_name) as category,categories.slug as category_slug from news join categories on find_in_set(categories.id, news.category_id) where FIND_IN_SET('.$this->category.',news.category_id) and news.highlights <> 1 and news.hot_article <> 1 group by news.id ORDER by news.id DESC limit 4'; 
-            $data = DB::select($othersNewsSql);
+            $othersNewsSql = 'select a.*,GROUP_CONCAT(DISTINCT c.category_name) as category,e.url as thumbnill_image from news a
+            left join news_categories_links b on b.news_section_id = a.id
+            left join categories c on c.id = b.category_id
+            left join files_related_morphs d on (d.related_id = a.id and d.field="news_image")
+            left join files e on e.id = d.file_id
+            where a.hot_article <> 1 and a.highlights <> 1 and c.id = ?
+            group by a.id ORDER BY a.id DESC limit 4'; 
+            $data = DB::select($othersNewsSql,[$this->category]);
             $this->otherNews = $data;
         }
     }

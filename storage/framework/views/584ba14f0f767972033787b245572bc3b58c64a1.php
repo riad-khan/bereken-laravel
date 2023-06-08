@@ -6,7 +6,7 @@
                 class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-4 lg:px-0 ">
                 <div class="py-4 flex flex-row items-center justify-between">
                     <a href="/" class="flex items-center">
-                        <img src="{{ asset('/frontend/assets/img/full-logo.svg') }}" class="mr-3 h-6 sm:h-9"
+                        <img src="<?php echo e(asset('/frontend/assets/img/full-logo.svg')); ?>" class="mr-3 h-6 sm:h-9"
                             alt="Flowbite Logo" />
                     </a>
                     <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
@@ -20,14 +20,14 @@
                 </div>
                 <nav :class="{ 'flex': open, 'hidden': !open }"
                     class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
-                    <a class="{{ Request::segment(1) == '' ? 'active-link':'' }} py-2 mx-0 md:mx-2 text-sm font-semibold text-[#2B313B] hover:text-[#0052fe] bg-white md:mt-0 hover:text-blue-500 "
+                    <a class="<?php echo e(Request::segment(1) == '' ? 'active-link':''); ?> py-2 mx-0 md:mx-2 text-sm font-semibold text-[#2B313B] hover:text-[#0052fe] bg-white md:mt-0 hover:text-blue-500 "
                         href="/">Home</a>
 
                    
                     <div x-on:mouseover="open = true" x-on:mouseleave="open = false" class=""
                         x-data="{ open: false }">
                         <button x-on:mouseover="open = true" x-on:mouseleave="open = false"
-                            class="{{Request::segment(1) == 'calculations' ? 'active-link':''}} flex flex-row items-center justify-between w-full py-2 my-0 md:mx-2 text-sm font-semibold text-left text-[#2B313B] bg-transparent md:w-auto md:inline md:ml-4 hover:text-[#0052fe] ">
+                            class="<?php echo e(Request::segment(1) == 'calculations' ? 'active-link':''); ?> flex flex-row items-center justify-between w-full py-2 my-0 md:mx-2 text-sm font-semibold text-left text-[#2B313B] bg-transparent md:w-auto md:inline md:ml-4 hover:text-[#0052fe] ">
                             <span><a href="/calculations">Calculations</a></span>
                             <svg fill="currentColor" viewBox="0 0 20 20"
                                 :class="{ 'rotate-180': open, 'rotate-0': !open }"
@@ -48,68 +48,50 @@
                             <div :class="{ 'grid': open, 'hidden': !open }"
                                 class="hidden grid inset-x-0 top-0 absolute z-40 grid-cols-1 w-full text-sm bg-white shadow-md">
                                 <button class="absolute right-2 top-2 md:hidden" @click="open = false"><img
-                                        src="{{ asset('frontend/assets/img/close.svg') }}" alt="icon"></button>
+                                        src="<?php echo e(asset('frontend/assets/img/close.svg')); ?>" alt="icon"></button>
                                 <div
                                     class="grid py-5 px-4 md:mx-auto max-w-screen-xl gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-6 md:px-4">
 
-                                    @php
+                                    <?php
                                         $dropdownCategorySql = 'select a.id,a.name,a.status from dropdown_categories a where a.status = 1';
                                                                     
                                      $dropdownCategories = DB::select($dropdownCategorySql)
-                                    @endphp
+                                    ?>
 
-                                    @foreach ($dropdownCategories as $item )
+                                    <?php $__currentLoopData = $dropdownCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <ul aria-labelledby="mega-menu-full-dropdown-button leading-7">
 
 
 
                                         <li class="mb-2">
                                             <div class="font-semibold text-black text-base mb-4">
-                                                {{ $item->name }}
+                                                <?php echo e($item->name); ?>
+
                                             </div>
 
                                         </li>
 
-                                        @php
+                                        <?php
                                           $menuSql = 'select a.name,a.url from dropdown_menus a 
                                                     left join dropdown_menus_dropdown_category_links b on b.dropdown_menu_id = a.id
                                                     where b.dropdown_category_id = ? order by a.display_order';
                                         $menus = DB::select($menuSql, [$item->id])
-                                        @endphp
+                                        ?>
 
                                        
-                                        @foreach ($menus as $menu)
+                                        <?php $__currentLoopData = $menus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $menu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                                            
                                             <li class="mb-2">
-                                                <a href="{{$menu->url}}"
-                                                    class="block text-xs font-normal text-[#6B6C6F]">{{ $menu->name }}</a>
+                                                <a href="<?php echo e($menu->url); ?>"
+                                                    class="block text-xs font-normal text-[#6B6C6F]"><?php echo e($menu->name); ?></a>
                                             </li>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                     </ul>
                                         
-                                    @endforeach
-                                    {{-- @if ($title1[0]->status == 1)
-                                        <ul aria-labelledby="mega-menu-full-dropdown-button leading-7">
-
-
-
-                                            <li class="mb-2">
-                                                <div class="font-semibold text-black text-base mb-4">
-                                                    {{ $title1[0]->name }}
-                                                </div>
-
-                                            </li>
-                                            @foreach ($links1 as $item)
-                                                <li class="mb-2">
-                                                    <a href="{{ $item->url }}"
-                                                        class="block text-xs font-normal text-[#6B6C6F]">{{ $item->name }}</a>
-                                                </li>
-                                            @endforeach
-
-                                        </ul>
-                                    @endif --}}
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    
 
                                    
 
@@ -128,12 +110,12 @@
                         </div>
                     </div>
 
-                    <a class="{{Request::segment(1) == 'knowledge' ? 'active-link':''}} py-2 mx-0 md:mx-2 text-sm font-semibold text-[#2B313B] bg-white rounded-lg hover:text-[#0052fe] "
+                    <a class="<?php echo e(Request::segment(1) == 'knowledge' ? 'active-link':''); ?> py-2 mx-0 md:mx-2 text-sm font-semibold text-[#2B313B] bg-white rounded-lg hover:text-[#0052fe] "
                     href="/knowledge">Knowledge</a>
-                <a class="{{Request::segment(1) == 'compares' ? 'active-link':''}} py-2 mx-0 md:mx-2 text-sm font-semibold text-[#2B313B] bg-white rounded-lg hover:text-[#0052fe] "
+                <a class="<?php echo e(Request::segment(1) == 'compares' ? 'active-link':''); ?> py-2 mx-0 md:mx-2 text-sm font-semibold text-[#2B313B] bg-white rounded-lg hover:text-[#0052fe] "
                     href="/compares">Compares</a>
 
-                    <a class="{{Request::segment(1) == 'news' ? 'active-link':''}} py-2 mx-0 md:mx-2 text-sm font-semibold text-[#2B313B] bg-white rounded-lg hover:text-[#0052fe] "
+                    <a class="<?php echo e(Request::segment(1) == 'news' ? 'active-link':''); ?> py-2 mx-0 md:mx-2 text-sm font-semibold text-[#2B313B] bg-white rounded-lg hover:text-[#0052fe] "
                         href="/news">News</a>
                 </nav>
             </div>
@@ -141,3 +123,4 @@
 
     </header>
     <!-- header end -->
+<?php /**PATH /home/riad/Documents/bereken-laravel/resources/views/livewire/includes/header.blade.php ENDPATH**/ ?>

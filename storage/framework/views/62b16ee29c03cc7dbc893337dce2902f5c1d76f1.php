@@ -1,4 +1,4 @@
-@php
+<?php
     $id = Route::input('id');
     
     $seo_data_sql = 'select
@@ -24,35 +24,35 @@
         $seo_social = DB::select($socialSql, [$seo_data[0]->component_id]);
     }
     
-@endphp
-@section('meta')
+?>
+<?php $__env->startSection('meta'); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ $seo_data[0]->meta_title }} </title>
-    <meta name="description" content="{{ $seo_data[0]->meta_description }}">
-    <meta name="keywords" content="{{ $seo_data[0]->keywords }}">
+    <title><?php echo e($seo_data[0]->meta_title); ?> </title>
+    <meta name="description" content="<?php echo e($seo_data[0]->meta_description); ?>">
+    <meta name="keywords" content="<?php echo e($seo_data[0]->keywords); ?>">
 
     <script>
-        {!! html_entity_decode($seo_data[0]->structured_data) !!}
+        <?php echo html_entity_decode($seo_data[0]->structured_data); ?>
+
     </script>
 
 
-    @foreach ($seo_social as $social_meta)
-        @if ($social_meta->social_network == 'Facebook')
-            <meta property="og:title" content="{{ $social_meta->title }}">
-            <meta property="og:description" content="{{ $social_meta->description }}">
-            <meta property="og:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-            {{-- <meta property="og:url" content="URL of your page">
-    <meta property="og:type" content="website"> --}}
-        @else
-            <meta name="twitter:card" content="{{ $social_meta->description }}">
-            <meta name="twitter:title" content="{{ $social_meta->title }}">
-            <meta name="twitter:description" content="{{ $social_meta->description }}">
-            <meta name="twitter:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-        @endif
-    @endforeach
-@endsection
+    <?php $__currentLoopData = $seo_social; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $social_meta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if($social_meta->social_network == 'Facebook'): ?>
+            <meta property="og:title" content="<?php echo e($social_meta->title); ?>">
+            <meta property="og:description" content="<?php echo e($social_meta->description); ?>">
+            <meta property="og:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+            
+        <?php else: ?>
+            <meta name="twitter:card" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:title" content="<?php echo e($social_meta->title); ?>">
+            <meta name="twitter:description" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+        <?php endif; ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php $__env->stopSection(); ?>
 <div>
 
 
@@ -62,7 +62,7 @@
             <!-- container start -->
             <div class="section-title text-center ">
                 <h1 class="text-[32px] font-semibold text-[#2B313B] p-4 sm:pb-6  sm:pt-4">
-                    {{ strtoupper(Route::input('category')) }} News</h1>
+                    <?php echo e(strtoupper(Route::input('category'))); ?> News</h1>
             </div>
         </div>
         <!-- container end -->
@@ -83,28 +83,57 @@
                             <div class="selectBtn" data-type="firstOption">All News</div>
                             <div class="selectDropdown">
 
-                                @php
+                                <?php
                                     $categories = DB::table('categories')->get();
-                                @endphp
+                                ?>
 
                                 <div class="option" data-type="firstOption">All News</div>
-                                @foreach ($categories as $item)
+                                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="option" data-type="secondOption" onclick="Redirect(this)"
-                                        data-url="{{ '/news/' . $item->slug . '/' . $item->id . '' }}">
-                                        {{ $item->category_name }}
+                                        data-url="<?php echo e('/news/' . $item->slug . '/' . $item->id . ''); ?>">
+                                        <?php echo e($item->category_name); ?>
+
                                     </div>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                         </div>
                     </div>
                 </span>
                 <!-- slider-area start -->
 
-                <livewire:components.news.highlights :category="Route::input('id')" />
+                <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.news.highlights', ['category' => Route::input('id')])->html();
+} elseif ($_instance->childHasBeenRendered('l1555375956-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1555375956-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1555375956-0');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1555375956-0');
+} else {
+    $response = \Livewire\Livewire::mount('components.news.highlights', ['category' => Route::input('id')]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1555375956-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 
                 <!-- slider-area end -->
 
-                <livewire:components.news.other-news :category="Route::input('id')" />
+                <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.news.other-news', ['category' => Route::input('id')])->html();
+} elseif ($_instance->childHasBeenRendered('l1555375956-1')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1555375956-1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1555375956-1');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1555375956-1');
+} else {
+    $response = \Livewire\Livewire::mount('components.news.other-news', ['category' => Route::input('id')]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1555375956-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 
                 <!-- main-inner-area end -->
             </div>
@@ -132,7 +161,7 @@
 
                     </div>
                     <div class="adds-area p-4 flex flex-col bg-[#F5F8FF] rounded-lg mb-3">
-                        <img src="{{ asset('/frontend/assets/img/compare-img.svg') }}" alt="image">
+                        <img src="<?php echo e(asset('/frontend/assets/img/compare-img.svg')); ?>" alt="image">
                         <h3 class="text-2xl text-[#2B313B] font-bold my-2">Compare your insurance</h3>
                         <p class="text-[#6C7A93] font-normal mb-2 text-sm">Save an average of € 259 per year on your car
                             insurance?</p>
@@ -142,7 +171,21 @@
                     </div>
 
 
-                    <livewire:components.news.hot-article :category="Route::input('id')" />
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.news.hot-article', ['category' => Route::input('id')])->html();
+} elseif ($_instance->childHasBeenRendered('l1555375956-2')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1555375956-2');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1555375956-2');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1555375956-2');
+} else {
+    $response = \Livewire\Livewire::mount('components.news.hot-article', ['category' => Route::input('id')]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1555375956-2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 
 
                 </div>
@@ -226,3 +269,4 @@
     </script>
 
 </div>
+<?php /**PATH /home/riad/Documents/bereken-laravel/resources/views/livewire/filter/filter-news.blade.php ENDPATH**/ ?>

@@ -7,10 +7,10 @@
         <div class="container mx-auto max-w-screen-xl">
             <!-- container start -->
             <div class="section-title text-center ">
-                <h2 class="text-[32px] font-semibold text-[#2B313B] p-4 sm:pb-16  sm:pt-4">{{$title}}</h2>
+                <h2 class="text-[32px] font-semibold text-[#2B313B] p-4 sm:pb-16  sm:pt-4"><?php echo e($title); ?></h2>
             </div>
-            @foreach ($news as $key => $item )
-            @php
+            <?php $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php
                 $time;
                 $wpm = 200;
                 $wordCount = str_word_count(strip_tags($item->content));
@@ -31,7 +31,7 @@
              
             
               
-            @endphp
+            ?>
 
             <ul>
                
@@ -39,31 +39,32 @@
                  
              
                 <li>
-                    <a href="/news/{{$item->slug}}-{{$item->id}}"
+                    <a href="/news/<?php echo e($item->slug); ?>-<?php echo e($item->id); ?>"
                         class="flex my-2 p-4 md:p-6 flex-col transition-all items-center hover:bg-[#EBF1FF] border border-[#F5F8FF] hover:border-[#EBF1FF] rounded-lg hover:shadow md:flex-row w-full bg-white">
                         <img class="object-cover w-full rounded-lg h-44 md:h-48 md:w-48"
-                            src="{{ env('STRAPI_URL') . $item->image }}" alt="image">
+                            src="<?php echo e(env('STRAPI_URL') . $item->image); ?>" alt="image">
 
                         <div class="flex flex-col justify-between py-2 md:py-0 md:px-4 leading-normal">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#2B313B]">{{$item->title}}</h5>
-                            <p class="mb-3 font-normal text-base text-[#6C7A93] underline">{{$item->short_description}}</p>
-                            <span class="publish-date-time  text-[#2B313B] font-normal text-xs">{{ date('F d, Y', strtotime($item->created_at)) }} • Read: {{$time}}</span>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#2B313B]"><?php echo e($item->title); ?></h5>
+                            <p class="mb-3 font-normal text-base text-[#6C7A93] underline"><?php echo e($item->short_description); ?></p>
+                            <span class="publish-date-time  text-[#2B313B] font-normal text-xs"><?php echo e(date('F d, Y', strtotime($item->created_at))); ?> • Read: <?php echo e($time); ?></span>
 
                             <div class="row mt-2">
-                              @foreach ($commaSeperated_category as $category )
+                              <?php $__currentLoopData = $commaSeperated_category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                             <span
-                                class="w-fit bg-[#EBF1FF] text-[#0051FF] text-xs font-semibold mt-2 px-2.5 py-2 rounded ">{{$category}}
+                                class="w-fit bg-[#EBF1FF] text-[#0051FF] text-xs font-semibold mt-2 px-2.5 py-2 rounded "><?php echo e($category); ?>
+
                                </span>&nbsp;
 
-                               @endforeach
+                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                         </div>
                     </a>
                 </li>
 
                 </ul>
-            @if ($key === 2)
+            <?php if($key === 2): ?>
             
             <div class="promo-add flex flex-col justify-start lg:flex-row lg:justify-between lg:items-center bg-[#0052FE] p-10 my-4 rounded-xl">
                 <div class="text-left">
@@ -74,15 +75,15 @@
                 <a data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" href="javascript:void(0)" class="w-[170px] mt-4 lg:mt-0 hover:text-[#0052FE] transition-all text-white border bg-[#0052FE] hover:bg-white focus:ring-4 focus:outline-none focus:ring-0 font-bold rounded-lg  text-bold px-5 py-2.5 text-center mr-2 mb-2">Subscribe Now</a>
             </div>
 
-            @endif
+            <?php endif; ?>
 
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     
 
             <div class="btn-area flex justify-center">
-                <a href="{{$link}}"
+                <a href="<?php echo e($link); ?>"
                     class="btn-translate-z bg-[#112954] opacity-100 hover:opacity-90 transition text-white flex text-xs font-semibold text-center justify-center items-center rounded py-[10px] px-[20px] my-6">
-                    <span class="flex items-center"> {{ $button_text }} <img src="{{asset('frontend/assets/img/icons/arrow-white.svg')}}" class="ml-2 h-2 w-2 float-right" class="ml-2"
+                    <span class="flex items-center"> <?php echo e($button_text); ?> <img src="<?php echo e(asset('frontend/assets/img/icons/arrow-white.svg')); ?>" class="ml-2 h-2 w-2 float-right" class="ml-2"
                         alt="icon"></span></a>
             </div>
         </div> <!-- container end -->
@@ -106,8 +107,8 @@
          <div class="px-6 py-6 lg:px-8">
              <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Subscribe Bereken
              </h3>
-             <form id="rate_form" action="{{url('/submit-subscribe')}}" method="post" data-parsley-validate="">
-                @csrf
+             <form id="rate_form" action="<?php echo e(url('/submit-subscribe')); ?>" method="post" data-parsley-validate="">
+                <?php echo csrf_field(); ?>
                  <div>
                      <label for="Name"
                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
@@ -136,7 +137,8 @@
      </div>
  </div>
 </div>
-{{-- Modal ends --}}
+
     </section>
     <!-- Latest News - End -->
 </div>
+<?php /**PATH /home/riad/Documents/bereken-laravel/resources/views/livewire/components/lattest-news.blade.php ENDPATH**/ ?>
