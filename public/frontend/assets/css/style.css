@@ -1368,6 +1368,51 @@ label.outline-btn.btn-translate-z,.gray-btn.outline-btn.btn-translate-z  {
 .h-modal{
     z-index: 55!important;
 }
+/* new-code */
+.title-ribbon {
+    background: #2CBEB1;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0px 5px;
+    border-radius: 2px;
+    transform: rotate(15deg);
+    position: absolute;
+    right: -20px;
+    top: 4px;
+    height: 26px;
+    line-height: 26px;
+}
+
+.ribbon-s {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-search input {
+    padding-left: 40px;
+    position: relative;
+}
+
+.nav-search:after {
+    content: "";
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 4px;
+    top: 3px;
+    background: url('../img/search-icon.svg');
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: 16px;
+    background-position: center;
+    z-index: 91;
+}
+
+.nav-search {
+    position: relative;
+}
+/* new-code end */
 @media only screen and (min-width: 768px) and (max-width: 860px) {
     .service-btn:after {
         right: 5px;

@@ -1,4 +1,4 @@
-@php
+<?php
     $seo_data_sql = 'select a.id,a.page_title,c.id as component_id,
                     c.meta_title,
                     c.meta_description,
@@ -24,40 +24,40 @@
     $seo_social = DB::select($seo_social_sql, [$seo_data[0]->component_id]);
     
     $settings = DB::select('select * from home_page_settings order by id ASC limit 1');
-@endphp
-@section('meta')
+?>
+<?php $__env->startSection('meta'); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ $seo_data[0]->meta_title }} </title>
-    <meta name="description" content="{{ $seo_data[0]->meta_description }}">
-    <meta name="keywords" content="{{ $seo_data[0]->keywords }}">
+    <title><?php echo e($seo_data[0]->meta_title); ?> </title>
+    <meta name="description" content="<?php echo e($seo_data[0]->meta_description); ?>">
+    <meta name="keywords" content="<?php echo e($seo_data[0]->keywords); ?>">
 
-    @foreach ($seo_social as $social_meta)
-        @if ($social_meta->social_network == 'Facebook')
-            <meta property="og:title" content="{{ $social_meta->title }}">
-            <meta property="og:description" content="{{ $social_meta->description }}">
-            <meta property="og:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-            {{-- <meta property="og:url" content="URL of your page">
-<meta property="og:type" content="website"> --}}
-        @else
-            <meta name="twitter:card" content="{{ $social_meta->description }}">
-            <meta name="twitter:title" content="{{ $social_meta->title }}">
-            <meta name="twitter:description" content="{{ $social_meta->description }}">
-            <meta name="twitter:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-        @endif
-    @endforeach
+    <?php $__currentLoopData = $seo_social; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $social_meta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if($social_meta->social_network == 'Facebook'): ?>
+            <meta property="og:title" content="<?php echo e($social_meta->title); ?>">
+            <meta property="og:description" content="<?php echo e($social_meta->description); ?>">
+            <meta property="og:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+            
+        <?php else: ?>
+            <meta name="twitter:card" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:title" content="<?php echo e($social_meta->title); ?>">
+            <meta name="twitter:description" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+        <?php endif; ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-    <link rel="canonical" href="{{ $seo_data[0]->canonical_url }}">
+    <link rel="canonical" href="<?php echo e($seo_data[0]->canonical_url); ?>">
 
     <script>
-        {!! html_entity_decode($seo_data[0]->structured_data) !!}
+        <?php echo html_entity_decode($seo_data[0]->structured_data); ?>
+
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
 <div>
 
-    @php
+    <?php
         $content_sql = 'select 
                         a.page_title,
                         a.id,
@@ -70,22 +70,22 @@
                         left join files e on e.id = c.file_id
                         where a.id = ?';
         $data = DB::select($content_sql, [$seo_data[0]->id]);
-    @endphp
+    ?>
 
     <section class="hero bg-[#F9FBFF] pt-20 p-4 md:pt-12 md:p-12 w-full items-center mx-auto">
         <div class="container mx-auto max-w-screen-xl">
             <div class="sm:w-[610px] w-full mx-auto px-4">
                 <div class="flex items-center">
                     <div class="hidden sm:flex sm:flex-none w-14">
-                        <img src="{{ env('STRAPI_URL') . $data[0]->left_icon }}" alt="icon">
+                        <img src="<?php echo e(env('STRAPI_URL') . $data[0]->left_icon); ?>" alt="icon">
                     </div>
                     <div class="grow text-center">
                         <h1
                             class="text-[#2B313B] font-semibold text-[24px] sm:text-[28px] md:text-[32px] leading-[1.1]">
-                            {{ $data[0]->page_title }} </h1>
+                            <?php echo e($data[0]->page_title); ?> </h1>
                     </div>
                     <div class="sm:flex sm:flex-none w-14 hidden">
-                        <img src="{{ env('STRAPI_URL') . $data[0]->right_icon }}" alt="icon">
+                        <img src="<?php echo e(env('STRAPI_URL') . $data[0]->right_icon); ?>" alt="icon">
                     </div>
                 </div>
             </div>
@@ -94,12 +94,12 @@
                 <div class="sm:w-3/4 w-full z-20 relative mx-auto bg-white rounded-2xl shadow">
                     <div class="p-6">
                         <div class="flex justify-between items-center search-top">
-                            <h2 class="text-base font-semibold text-[#2B313B]">{{ $settings[0]->search_text }}</h2>
+                            <h2 class="text-base font-semibold text-[#2B313B]"><?php echo e($settings[0]->search_text); ?></h2>
 
                             <div class="save-search p-2 relative">
                                 <a class="flex justify-between items-center cursor-pointer" onclick="showSearch()"
                                     class="flex justify-between transition-all opacity-100 hover:opacity-90">
-                                    <!-- <img src="{{ asset('/frontend/assets/img/save-icon.svg') }}" alt="icon"> -->
+                                    <!-- <img src="<?php echo e(asset('/frontend/assets/img/save-icon.svg')); ?>" alt="icon"> -->
                                     <svg class="transition" fill="#112954" width="12" height="12"
                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -146,7 +146,8 @@
                         </div>
 
                         <p class="text-gray-600 text-[10px] font-normal my-2">
-                            {{ $settings[0]->search_caption }}
+                            <?php echo e($settings[0]->search_caption); ?>
+
                         </p>
 
                     </div>
@@ -154,7 +155,21 @@
             </div>
             <!-- search-end -->
 
-            <livewire:components.service />
+            <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.service', [])->html();
+} elseif ($_instance->childHasBeenRendered('l1415335507-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1415335507-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1415335507-0');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1415335507-0');
+} else {
+    $response = \Livewire\Livewire::mount('components.service', []);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1415335507-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 
         </div>
         <!-- container end -->
@@ -163,7 +178,21 @@
 
     </section>
 
-    <livewire:components.populer-calculator :text="$settings[0]->populer_calculator_button_text" :url="$settings[0]->populer_calculator_button_url" />
+    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.populer-calculator', ['text' => $settings[0]->populer_calculator_button_text,'url' => $settings[0]->populer_calculator_button_url])->html();
+} elseif ($_instance->childHasBeenRendered('l1415335507-1')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1415335507-1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1415335507-1');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1415335507-1');
+} else {
+    $response = \Livewire\Livewire::mount('components.populer-calculator', ['text' => $settings[0]->populer_calculator_button_text,'url' => $settings[0]->populer_calculator_button_url]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1415335507-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 
     <section class="bg-white w-full p-4 md:p-12">
     <div class="container mx-auto max-w-screen-xl">
@@ -183,14 +212,28 @@
     </div><!-- container end -->
 </section>
 
-    {{-- <livewire:components.review-strategy /> --}}
+    
 
 
-    @if ($settings[0]->show_lattest_news_section == 1)
-        <livewire:components.lattest-news :title="$settings[0]->lattest_news_section_title" :buttontext="$settings[0]->lattest_news_button_text" :link="$settings[0]->lattest_news_button_link" />
-    @else
+    <?php if($settings[0]->show_lattest_news_section == 1): ?>
+        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.lattest-news', ['title' => $settings[0]->lattest_news_section_title,'buttontext' => $settings[0]->lattest_news_button_text,'link' => $settings[0]->lattest_news_button_link])->html();
+} elseif ($_instance->childHasBeenRendered('l1415335507-2')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1415335507-2');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1415335507-2');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1415335507-2');
+} else {
+    $response = \Livewire\Livewire::mount('components.lattest-news', ['title' => $settings[0]->lattest_news_section_title,'buttontext' => $settings[0]->lattest_news_button_text,'link' => $settings[0]->lattest_news_button_link]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1415335507-2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+    <?php else: ?>
         <p></p>
-    @endif
+    <?php endif; ?>
     <section class="bg-white w-full p-4 md:p-12 pb-[150px] pt-[100px] md:pb-[200px]">
         <div class="container mx-auto max-w-screen-xl">
             <!-- container start -->
@@ -235,11 +278,25 @@
                 </div>
         </div>
     </section>
-    @if ($settings[0]->show_contact_us_section == 1)
-        <livewire:components.contact-us />
-    @else
+    <?php if($settings[0]->show_contact_us_section == 1): ?>
+        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.contact-us', [])->html();
+} elseif ($_instance->childHasBeenRendered('l1415335507-3')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1415335507-3');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1415335507-3');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1415335507-3');
+} else {
+    $response = \Livewire\Livewire::mount('components.contact-us', []);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1415335507-3', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+    <?php else: ?>
         <p></p>
-    @endif
+    <?php endif; ?>
 
 
 
@@ -291,7 +348,7 @@
 
                     li += '<li class="color-[#2B313B] font-normal text-sm"><span>' + item +
                         ' <button onclick="removeItem(' + i +
-                        ')"> <img src="{{ asset('/frontend/assets/img/close-white.svg') }}" alt="icon"></button></span></li>'
+                        ')"> <img src="<?php echo e(asset('/frontend/assets/img/close-white.svg')); ?>" alt="icon"></button></span></li>'
                 })
                 document.getElementById('show-save-list').innerHTML = li
 
@@ -325,3 +382,4 @@
     </script>
 
 </div>
+<?php /**PATH C:\Users\saleh\OneDrive\Desktop\Hassn Vai\Breken.nl\New-Design\bereken-laravel\resources\views/livewire/home.blade.php ENDPATH**/ ?>
