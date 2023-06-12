@@ -16,7 +16,18 @@ class KnowledgeFilter extends Component
     public function mount($slug){
         $exploded_slug = explode('-',$slug);
         $id = end($exploded_slug);
-       $knowledges = DB::select('select * from knowledges where FIND_IN_SET('.$id.',category_id) order by id DESC');
+
+        $sql = 'select 
+        a.*,
+        e.url as thumbnill_image
+        from knowledges a 
+        left join knowledges_knowledge_categories_links b on b.knowledge_id = a.id
+        left join knowledge_categories c on c.id = b.knowledge_category_id
+        left join files_related_morphs d on (d.related_id = a.id and d.field = "knowledge_image")
+        left join files e on e.id = d.file_id
+        WHERE c.id = ? order by a.id DESC';
+
+       $knowledges = DB::select($sql,[$id]);
         $category_name = DB::table('knowledge_categories')->where('id','=',$id)->get();
         $this->categoryName = $category_name;
        $this->filterKnowledge = $knowledges;

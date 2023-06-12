@@ -1,18 +1,63 @@
 @php
-    $seo_data = DB::table('seo_data_tables')->where('page','=','Knowledge')->get();
+    $seo_data_sql = 'select a.id,a.page_title,c.id as component_id,
+                    c.meta_title,
+                    c.meta_description,
+                    c.keywords,
+                    c.meta_robots,
+                    c.structured_data,
+                    c.meta_viewport,
+                    c.canonical_url from page_seos a
+                    left join page_seos_components b on (b.entity_id = a.id and b.field="page_seo" )
+                    left join components_shared_seos c on c.id = b.component_id
+                    where a.select_page_type="Knowledge"
+                    order by a.id ASC limit 1';
+    $seo_data = DB::select($seo_data_sql);
+    
+    $seo_social_sql = 'select a.social_network,a.title,a.description,d.url
+from components_shared_meta_socials a
+    left join components_shared_seos_components b on b.component_id = a.id
+    left join files_related_morphs c on (c.related_id = b.entity_id and c.field="metaImage")
+    left join files d on d.id = c.file_id
+    where b.entity_id = ?';
+    
+    $seo_social = DB::select($seo_social_sql, [$seo_data[0]->component_id]);
+    
 @endphp
 @section('meta')
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{$seo_data[0]->title}} -  {{ $categoryName[0]->category_name }}</title>
-    <meta name="description" content="{{$seo_data[0]->seo_meta}}">
-    <meta name="description" content="{{$seo_data[0]->seo_keywords}}">
+    <title>{{ $seo_data[0]->meta_title }} -  {{ $categoryName[0]->category_name }} </title>
+    <meta name="description" content="{{ $seo_data[0]->meta_description }}">
+    <meta name="keywords" content="{{ $seo_data[0]->keywords }}">
+
+    @foreach ($seo_social as $social_meta)
+        @if ($social_meta->social_network == 'Facebook')
+            <meta property="og:title" content="{{ $social_meta->title.'-'. $categoryName[0]->category_name }}">
+            <meta property="og:description" content="{{ $social_meta->description }}">
+            <meta property="og:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
+            {{-- <meta property="og:url" content="URL of your page">
+   <meta property="og:type" content="website"> --}}
+        @else
+            <meta name="twitter:card" content="{{ $social_meta->description }}">
+            <meta name="twitter:title" content="{{ $social_meta->title.'-'. $categoryName[0]->category_name }}">
+            <meta name="twitter:description" content="{{ $social_meta->description }}">
+            <meta name="twitter:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
+        @endif
+    @endforeach
+
+    <link rel="canonical" href="{{ $seo_data[0]->canonical_url }}">
 
     <script>
         {!! html_entity_decode($seo_data[0]->structured_data) !!}
     </script>
 @endsection
+
+
+
+
+
+
 
 <div>
     <section class="hero bg-white pt-20 p-4 md:pt-12 md:p-12 w-full items-center mx-auto">
@@ -49,7 +94,7 @@
                         <a href="/knowledge-details/{{$row->slug}}-{{$row->id}}"
                             class="flex  mb-3 p-2 flex-col transition-all hover:bg-[#EBF1FF] border border-[#EBF1FF] hover:border-[#EBF1FF] rounded-lg hover:shadow md:flex-col  bg-white">
                             <img class="object-cover w-full rounded-t-lg h-auto md:rounded-none md:rounded-l-lg"
-                                src="{{ url($row->thumbnill_image) }}" alt="image">
+                                src="{{ env('STRAPI_URL') . $row->thumbnill_image }}" alt="image">
 
                             <div class="flex flex-col justify-between px-2 leading-normal">
                                 <h5 class="mb-2 text-base font-semibold tracking-tight text-[#2B313B]">

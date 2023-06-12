@@ -13,9 +13,10 @@
                     order by a.id ASC limit 1';
     $seo_data = DB::select($seo_data_sql);
     
-    $seo_social_sql = 'select a.social_network,a.title,a.description,d.url  from components_shared_meta_socials a
+    $seo_social_sql = 'select a.social_network,a.title,a.description,d.url
+from components_shared_meta_socials a
     left join components_shared_seos_components b on b.component_id = a.id
-    left join files_related_morphs c on (c.related_id = b.component_id and c.field="metaImage")
+    left join files_related_morphs c on (c.related_id = b.entity_id and c.field="metaImage")
     left join files d on d.id = c.file_id
     where b.entity_id = ?';
     

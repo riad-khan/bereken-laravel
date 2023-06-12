@@ -17,7 +17,7 @@
                     <li class="" x-data="accordion({{$index}})">
                         <h4 @click="handleClick()"
                             class="flex items-center justify-between w-full py-5 font-semibold text-sm text-left text-[#2B313B] border-b border-[#F5F8FF] cursor-pointer">
-                            <span>{{$row->title}}</span>
+                            <span>{{$row->question}}</span>
                             <svg :class="handleRotate()"
                                 class="fill-current text-[#2B313B] h-6 w-6 transform transition-transform duration-500 rotate-90"
                                 fill="currentColor" viewBox="0 0 20 20"
@@ -30,7 +30,7 @@
                         <div x-ref="tab" :style="handleToggle()"
                             class="font-normal text-xs border-b border-[#F5F8FF] overflow-hidden max-h-0 duration-500 transition-all">
                             <p class="py-5 font-normal text-sm text-[#6C7A93]">
-                               {{$row->content}}
+                               {{$row->answer}}
                             </p>
                         </div>
                     </li>

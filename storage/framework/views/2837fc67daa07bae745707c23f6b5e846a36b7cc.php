@@ -1,4 +1,4 @@
-@php
+<?php
     $seo_data_sql = 'select 
                         b.*
                        
@@ -16,36 +16,36 @@ from components_shared_meta_socials a
     
     $seo_social = DB::select($seo_social_sql, [$seo_data[0]->id]);
     
-@endphp
-@section('meta')
+?>
+<?php $__env->startSection('meta'); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ $seo_data[0]->meta_title }} </title>
-    <meta name="description" content="{{ $seo_data[0]->meta_description }}">
-    <meta name="keywords" content="{{ $seo_data[0]->keywords }}">
+    <title><?php echo e($seo_data[0]->meta_title); ?> </title>
+    <meta name="description" content="<?php echo e($seo_data[0]->meta_description); ?>">
+    <meta name="keywords" content="<?php echo e($seo_data[0]->keywords); ?>">
 
-    @foreach ($seo_social as $social_meta)
-        @if ($social_meta->social_network == 'Facebook')
-            <meta property="og:title" content="{{ $social_meta->title }}">
-            <meta property="og:description" content="{{ $social_meta->description }}">
-            <meta property="og:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-            {{-- <meta property="og:url" content="URL of your page">
-   <meta property="og:type" content="website"> --}}
-        @else
-            <meta name="twitter:card" content="{{ $social_meta->description }}">
-            <meta name="twitter:title" content="{{ $social_meta->title }}">
-            <meta name="twitter:description" content="{{ $social_meta->description }}">
-            <meta name="twitter:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-        @endif
-    @endforeach
+    <?php $__currentLoopData = $seo_social; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $social_meta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if($social_meta->social_network == 'Facebook'): ?>
+            <meta property="og:title" content="<?php echo e($social_meta->title); ?>">
+            <meta property="og:description" content="<?php echo e($social_meta->description); ?>">
+            <meta property="og:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+            
+        <?php else: ?>
+            <meta name="twitter:card" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:title" content="<?php echo e($social_meta->title); ?>">
+            <meta name="twitter:description" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+        <?php endif; ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-    <link rel="canonical" href="{{ $seo_data[0]->canonical_url }}">
+    <link rel="canonical" href="<?php echo e($seo_data[0]->canonical_url); ?>">
 
     <script>
-        {!! html_entity_decode($seo_data[0]->structured_data) !!}
+        <?php echo html_entity_decode($seo_data[0]->structured_data); ?>
+
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
 <div>
     <section class="hero bg-white pt-20 p-4 md:p-12 md:pb-4  w-full items-center mx-auto">
@@ -59,21 +59,21 @@ from components_shared_meta_socials a
                     </li>
                     <li>
 
-                        @php
+                        <?php
                             $category = $details[0]->category_id;
                            
 
                             $cat_name = DB::select('select category_name from knowledge_categories where id = '.$category.'')
-                        @endphp
+                        ?>
 
                         <div class="flex items-center"><span class="text-[#D3D7DE] font-normal text-xs"> / </span><a
                                 href="#"
-                                class="ml-1 text-sm font-normal text-[#2B313B] hover:text-gray-900 md:ml-2">{{ucfirst($cat_name[0]->category_name)}}</a>
+                                class="ml-1 text-sm font-normal text-[#2B313B] hover:text-gray-900 md:ml-2"><?php echo e(ucfirst($cat_name[0]->category_name)); ?></a>
                         </div>
                     </li>
                     <li aria-current="page">
                         <div class="flex items-center"><span class="text-[#D3D7DE] font-normal text-xs"> / </span><span
-                                class="ml-1 text-sm font-normal text-[#0052FE] md:ml-2">{{$details[0]->title}}</span>
+                                class="ml-1 text-sm font-normal text-[#0052FE] md:ml-2"><?php echo e($details[0]->title); ?></span>
                         </div>
                     </li>
                 </ol>
@@ -92,15 +92,16 @@ from components_shared_meta_socials a
 
                     <div class="post-detail">
                         
-                    <img class="rounded-lg my-3" src="{{ env('STRAPI_URL') . $details[0]->banner_image }}" alt="image">
+                    <img class="rounded-lg my-3" src="<?php echo e(env('STRAPI_URL') . $details[0]->banner_image); ?>" alt="image">
                        
-                        <h1 class="font-semibold text-[32px] text-[#2B313B] leading-none mb-6">{{$details[0]->title}}</h1>
-                        <p class="text-[#6C7A93] font-normal text-xs mb-6 leading-6">{{$details[0]->short_description}}</p>
+                        <h1 class="font-semibold text-[32px] text-[#2B313B] leading-none mb-6"><?php echo e($details[0]->title); ?></h1>
+                        <p class="text-[#6C7A93] font-normal text-xs mb-6 leading-6"><?php echo e($details[0]->short_description); ?></p>
                     </div>                  
                     <div class="info-area py-4">
                         <!-- info area start -->
                         <div class="single-info">
-                            {!! html_entity_decode($details[0]->content) !!}
+                            <?php echo html_entity_decode($details[0]->content); ?>
+
                         </div>
                     </div> <!-- info area end -->
                 </div> <!-- main-inner-area end -->
@@ -114,7 +115,8 @@ from components_shared_meta_socials a
                     <div class="faq mb-3 border-l border-t rounded-t-2xl border-r border-[#F5F8FF]">
                         <div class="flex justify-center items-start px-3">
                             <div class="w-full">                            
-                                {!! html_entity_decode($details[0]->table_of_contents) !!}
+                                <?php echo html_entity_decode($details[0]->table_of_contents); ?>
+
                             </div>
                           </div>
 
@@ -123,7 +125,7 @@ from components_shared_meta_socials a
                         </div>
                     </div>
                     <div class="adds-area p-4 flex flex-col bg-[#F5F8FF] rounded-lg mb-3">
-                        <img src="{{asset('/frontend/assets/img/compare-img.svg')}}" alt="image">
+                        <img src="<?php echo e(asset('/frontend/assets/img/compare-img.svg')); ?>" alt="image">
                         <h3 class="text-2xl text-[#2B313B] font-bold my-2">Compare your insurance</h3>
                         <p class="text-[#6C7A93] font-normal mb-2 text-sm">Save an average of € 259 per year on your car insurance?</p>
                         <a href="#" class="p-4 text-center outline-btn btn-translate-z bg-[#0052FE] opacity-100 hover:opacity-90 transition text-white text-xs font-bold rounded-md">Get it Now</a>
@@ -159,3 +161,4 @@ from components_shared_meta_socials a
     })
 </script>
 </div>
+<?php /**PATH /home/riad/Documents/bereken-laravel/resources/views/livewire/knowledge/knowledge-details.blade.php ENDPATH**/ ?>

@@ -7,16 +7,16 @@
             <div class="w-full">
                 <ul class="flex flex-col">
 
-                @foreach ($faq as $key=>$item )
+                <?php $__currentLoopData = $faq; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                    @php
+                    <?php
                         $index = $key+1;
-                    @endphp
+                    ?>
  
-                    <li class="" x-data="accordion({{$index}})">
+                    <li class="" x-data="accordion(<?php echo e($index); ?>)">
                         <h4 @click="handleClick()"
                             class="flex items-center justify-between w-full py-5 font-semibold text-sm text-left text-[#2B313B] border-b border-[#F5F8FF] cursor-pointer">
-                            <span>{{$item->question}}</span>
+                            <span><?php echo e($item->question); ?></span>
                             <svg :class="handleRotate()"
                                 class="fill-current text-[#2B313B] h-6 w-6 transform transition-transform duration-500 rotate-90"
                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -28,12 +28,13 @@
                         <div x-ref="tab" :style="handleToggle()"
                             class="font-normal text-sm border-b border-[#F5F8FF] overflow-hidden max-h-0 duration-500 transition-all">
                             <p class="py-5 font-normal text-sm text-[#6C7A93]">
-                              {{$item->answer}}
+                              <?php echo e($item->answer); ?>
+
                             </p>
                         </div>
                     </li>
 
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   
                   
                 </ul>
@@ -44,8 +45,9 @@
             class="px-3 items-center bg-white transition-all opacity-100 border-b border-[#F5F8FF] hover:opacity-90  py-4 my-2 text-center">
             <a href="#"
                 class="shadow-btn arrow-white inline-flex items-center text-xs font-semibold text-center text-[#0052FE]  hover:text-white">
-                View More <img src="{{asset('frontend/assets/img/icons/arrow-right-blue.svg')}}" class="ml-2" alt="arrow-icon">
+                View More <img src="<?php echo e(asset('frontend/assets/img/icons/arrow-right-blue.svg')); ?>" class="ml-2" alt="arrow-icon">
             </a>
         </div>
     </div>
 </div>
+<?php /**PATH /home/riad/Documents/bereken-laravel/resources/views/livewire/components/b-m-i/bmi-faq.blade.php ENDPATH**/ ?>

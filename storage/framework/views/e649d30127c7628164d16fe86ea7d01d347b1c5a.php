@@ -1,17 +1,6 @@
-{{-- @php
-    $seo_data = DB::table('seo_data_tables')->where('page','=','Internet')->get();
-@endphp --}}
-@section('meta')
-    {{-- <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{$seo_data[0]->title}} - Choose package</title>
-    <meta name="description" content="{{$seo_data[0]->seo_meta}}">
-    <meta name="description" content="{{$seo_data[0]->seo_keywords}}">
-
-    <script>
-        {!! html_entity_decode($seo_data[0]->structured_data) !!}
-    </script> --}}
+<?php $__env->startSection('meta'); ?>
+    
     <style>
         .selected-tv {
             font-size: 16px;
@@ -172,14 +161,14 @@
             }
         }
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
 <div>
 
-    @php
+    <?php
         $type = $_GET['type'];
         $zip = $_GET['zip'];
         $hnr = $_GET['nr'];
-    @endphp
+    ?>
 
    <div>
        <section  id="product-content" class="hero bg-white pt-20 p-4 md:pt-12 lg:p-12 w-full items-center mx-auto">
@@ -199,7 +188,7 @@
 
                                             <div class="no-label w-full sm:w-52">
                                                 <div class="select" id="news">
-                                                    <div class="selectBtn" data-type="firstOption">{{$type == "all" ?"All in 1":""}}</div>
+                                                    <div class="selectBtn" data-type="firstOption"><?php echo e($type == "all" ?"All in 1":""); ?></div>
                                                     <div class="selectDropdown" style="z-index: 2;">
 
                                                         <div class="option" onclick="FilterByType(this)"
@@ -224,43 +213,43 @@
                             </div>
 
 
-                           {{--                        <form action="" class="flex flex-col">--}}
-                           {{--                            <div class="mb-3">--}}
+                           
+                           
 
-                           {{--                                <div class="no-label w-full sm:w-52">--}}
-                           {{--                                    <div class="select" id="news">--}}
-                           {{--                                        <div class="selectBtn" data-type="firstOption">Select Type</div>--}}
-                           {{--                                        <div class="selectDropdown" style="z-index: 2;">--}}
+                           
+                           
+                           
+                           
 
-                           {{--                                            <div class="option" onclick="FilterByType(this)"--}}
-                           {{--                                                 data-value="all" data-type="firstOption">All in 1</div>--}}
-                           {{--                                            <div class="option" data-type="secondOption"--}}
-                           {{--                                                 onclick="FilterByType(this)" data-value="internet-tv">--}}
-                           {{--                                                Internet & Tv--}}
-                           {{--                                            </div>--}}
-                           {{--                                            <div class="option" data-type="secondOption"--}}
-                           {{--                                                 onclick="FilterByType(this)" data-value="internet-bellen">--}}
-                           {{--                                                Internet & Bellen--}}
-                           {{--                                            </div>--}}
-                           {{--                                            <div class="option" data-type="secondOption"--}}
-                           {{--                                                 onclick="FilterByType(this)" data-value="internet">--}}
-                           {{--                                                Alleen Internet--}}
-                           {{--                                            </div>--}}
-                           {{--                                        </div>--}}
-                           {{--                                    </div>--}}
-                           {{--                                </div>--}}
-                           {{--                            </div>--}}
-                           {{--                        </form>--}}
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
 
                            <div class="grid grid-cols-1 md:ml-4 lg:ml-14 md:grid-cols-2 gap-4">
                                <div class="flex items-center justify-start">
                                    <span class="text-[#2B313B] text-sm font-normal mr-3">Zip Code</span>
-                                   <input type="text" id="zip" value="{{ $zip ? $zip : '' }}"
+                                   <input type="text" id="zip" value="<?php echo e($zip ? $zip : ''); ?>"
                                           class="w-[100px] text-[#2B313B] text-base font-normal border-b border-[#0052FE] focus:outline-none ">
                                </div>
                                <div class="flex items-center justify-start md:justify-between">
                                    <span class="text-[#2B313B] text-sm font-normal mr-3">Huisnr</span>
-                                   <input type="text" id="hnr" value="{{ $hnr ? $hnr : '' }}"
+                                   <input type="text" id="hnr" value="<?php echo e($hnr ? $hnr : ''); ?>"
                                           class="w-auto text-[#2B313B] text-base font-normal border-b border-[#0052FE] focus:outline-none ">
                                </div>
                            </div>
@@ -333,7 +322,7 @@
                                 class="flex border border-[#F5F8FF] rounded-md p-3 mb-4 md:border-none md:p-0  items-center justify-between">
                             <h2 class="text-[#2B313B] font-semibold text-base">Filters</h2>
                             <button class="visible md:hidden" @click="open = ! open"><img
-                                        src="{{ asset('/frontend/assets/img/filter.svg') }}" alt="icon"></button>
+                                        src="<?php echo e(asset('/frontend/assets/img/filter.svg')); ?>" alt="icon"></button>
                           
                         </span>
 
@@ -341,7 +330,7 @@
                                <div
                                        class="relative flex flex-col bg-white inner-area border border-[#F5F8FF] rounded-2xl p-5">
                                    <button class="absolute right-2 top-2 md:hidden" @click="open = false"><img
-                                               src="{{ asset('/frontend/assets/img/close.svg') }}" alt="icon"></button>
+                                               src="<?php echo e(asset('/frontend/assets/img/close.svg')); ?>" alt="icon"></button>
                                    <span class="single-filter mb-4">
                                     <h2 class="text-[#2B313B] font-semibold text-2xl mb-4 flex md:hidden">Filters</h2>
                                  
@@ -356,7 +345,7 @@
 
                                             <div class="no-label w-full sm:w-52">
                                                 <div class="select" id="news">
-                                                    <div class="selectBtn" data-type="firstOption">{{$type == "all" ?"All in 1":""}}</div>
+                                                    <div class="selectBtn" data-type="firstOption"><?php echo e($type == "all" ?"All in 1":""); ?></div>
                                                     <div class="selectDropdown" style="z-index: 2;">
 
                                                         <div class="option" onclick="FilterByType(this)"
@@ -803,7 +792,7 @@
 
 
                         <div class="text-center loader-img">
-                            <img id="loader" class="hidden" src="{{asset('/frontend/assets/loader.svg')}}">
+                            <img id="loader" class="hidden" src="<?php echo e(asset('/frontend/assets/loader.svg')); ?>">
 
                         <button id="load_more" onclick="loadMore()" type="button"
                                class="hidden bg-white text-[#0052FE] hover:bg-[#0052FE] hover:text-white border border-[#0052F0] transition h-fit focus:outline-none focus:ring-0 font-xs rounded font-bold px-10 py-2 text-center">Load
@@ -823,7 +812,7 @@
                </div>
            </div> <!-- container end -->
 
-           {{--        Compare plans --}}
+           
 
 
 
@@ -835,7 +824,7 @@
 
            </div>
            <button class="absolute right-2 top-2 md:hidden" @click="open = false"><img
-                                               src="{{ asset('/frontend/assets/img/close.svg') }}" alt="icon"></button>
+                                               src="<?php echo e(asset('/frontend/assets/img/close.svg')); ?>" alt="icon"></button>
 
            <a onclick="compareNow()" class="com-btn outline-btn btn-translate-z flex justify-center h-auto w-full md:w-fit bg-[#112954] text-white text-sm font-bold py-2.5 px-6 rounded-lg transition-all">Compare</a>
            <a onclick="removeCompare()" class="com-btn-b bg-white text-[#0052FE] hover:bg-[#0052FE] hover:text-white transition h-fit focus:outline-none focus:ring-0 font-xs rounded-[6px] font-bold px-10 py-2 text-center">Sluiten</a>
@@ -922,13 +911,13 @@
                    </div>
                </div>
                <div class="button-area flex justify-end mt-14">
-                   <a onclick="showProduct()" class="gray-btn outline-btn btn-translate-z flex bg-[#0052fe] text-white text-xs font-bold py-2.5 px-6 rounded transition-all cursor-pointer  text-xs font-semibold text-center justify-center items-center rounded py-4 px-2 my-6 w-fit mr-3"><span class="flex items-center"><img src="{{asset('/frontend/assets/img/arrow-white.svg')}}" class="mr-2 h-2 w-2 rotate-180 float-left"  alt="icon"> Go Back </span></a>
+                   <a onclick="showProduct()" class="gray-btn outline-btn btn-translate-z flex bg-[#0052fe] text-white text-xs font-bold py-2.5 px-6 rounded transition-all cursor-pointer  text-xs font-semibold text-center justify-center items-center rounded py-4 px-2 my-6 w-fit mr-3"><span class="flex items-center"><img src="<?php echo e(asset('/frontend/assets/img/arrow-white.svg')); ?>" class="mr-2 h-2 w-2 rotate-180 float-left"  alt="icon"> Go Back </span></a>
                </div>
            </div> <!-- container end -->
        </section>
    </div>
    
-   {{--                                modal 3 --}}
+   
                                    <div id="authentication-modal3" tabindex="-1" aria-hidden="true"
                                         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
                                        <div class="relative w-full h-full max-w-lg md:h-auto">
@@ -994,7 +983,7 @@
                                        </div>
                                    </div>
 
-   {{--                                modal 1 --}}
+   
                                    <div id="authentication-modal" tabindex="-1" aria-hidden="true"
                                         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
                                        <div class="relative w-full h-full max-w-md md:h-auto">
@@ -1418,7 +1407,7 @@ combi_providers=${operators}`;
                                 class="w-full block md:grow bg-[#F5F8FF] p-3 text-[#0052FE] text-sm font-semibold rounded-md">${item.discount_text}</span>
                             <div class="flex justify-between my-3 md:my-0">
                                 <a href=${item.signup_url} target=_blank class="flex items-center text-[#0052FE] font-bold text-sm mx-3">
-                                    View <img src="{{ asset('/frontend/assets/img/goto-link.svg') }}" class="mx-2"
+                                    View <img src="<?php echo e(asset('/frontend/assets/img/goto-link.svg')); ?>" class="mx-2"
                                         alt="icon">
                                 </a>
                                 <span class="flex items-center">
@@ -2985,7 +2974,7 @@ combi_providers=${ConvertToString}`;
                                 class="w-full block md:grow bg-[#F5F8FF] p-3 text-[#0052FE] text-sm font-semibold rounded-md">${item.discount_text}</span>
                             <div class="flex justify-between my-3 md:my-0">
                                 <a href=${item.signup_url} target=_blank class="flex items-center text-[#0052FE] font-bold text-sm mx-3">
-                                    View <img src="{{ asset('/frontend/assets/img/goto-link.svg') }}" class="mx-2"
+                                    View <img src="<?php echo e(asset('/frontend/assets/img/goto-link.svg')); ?>" class="mx-2"
                                         alt="icon">
                                 </a>
                                   <span class="flex items-center">
@@ -3297,7 +3286,7 @@ combi_providers=${ConvertToString}`;
                                               <span class="price font-semibold text-base text-[#2B313B] mx-0 sm:mx-2 md:mx-3">
                                                  € ${item.total_price}
                                               </span>
-                                              <button type="button"><img src="{{asset('/frontend/assets/img/close-x.svg')}}" alt="icon"></button>
+                                              <button type="button"><img src="<?php echo e(asset('/frontend/assets/img/close-x.svg')); ?>" alt="icon"></button>
 
                                           </span>
 
@@ -3320,7 +3309,7 @@ combi_providers=${ConvertToString}`;
                                               <span class="price font-semibold text-base text-[#2B313B] mx-0 sm:mx-2 md:mx-3">
                                                  € ${item.total_price}
                                               </span>
-                                              <button onclick="removeTab(${item.base_id})" type="button"><img src="{{asset('/frontend/assets/img/close-x.svg')}}" alt="icon"></button>
+                                              <button onclick="removeTab(${item.base_id})" type="button"><img src="<?php echo e(asset('/frontend/assets/img/close-x.svg')); ?>" alt="icon"></button>
 
                                           </span>
 
@@ -3448,7 +3437,7 @@ combi_providers=${ConvertToString}`;
                     <div class="top-part border-b border-[#F5F8FF] mb-3 pb-5">
                         <div class="left-info flex items-center justify-between">
                             <img src=${item.provider_logo} alt="logo">
-                                {{--<button type="button"><img src="{{asset('/frontend/assets/img/close-x.svg')}}" alt="icon"></button>--}}
+                                
                         </div>
                     </div>
                     <div class="in-list flex flex-row items-center justify-between">
@@ -3493,10 +3482,10 @@ combi_providers=${ConvertToString}`;
 
                 <div
                     class="com-mid grid grid-cols-1 gap-2 justify-items-start content-center p-5 border-b border-[#F5F8FF]">
-                    {{--<img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
-                    {{--    <img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
-                    {{--        <img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
-                    {{--            <img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
+                    
+                    
+                    
+                    
                                     <div class="py-2 text-black text-sm font-normal">${item.internet.speed_down}</div>
                                     <div class="py-2 text-black text-sm font-normal">${item.internet.connection}</div>
                                     <div class="py-2 text-black text-sm font-normal">${item.shipping_time}</div>
@@ -3506,10 +3495,10 @@ combi_providers=${ConvertToString}`;
 
                  <div
                     class="com-c grid grid-cols-1 gap-2 justify-items-start content-center p-5 border-b border-[#F5F8FF]">
-                    {{--<img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
-              {{--    <img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
-              {{--        <img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
-              {{--            <img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
+                    
+              
+              
+              
               <div class="py-2 text-black text-sm font-normal">${item.internet.speed_down}</div>
                                     <div class="py-2 text-black text-sm font-normal">${item.internet.speed_up}</div>
 
@@ -3517,15 +3506,15 @@ combi_providers=${ConvertToString}`;
 
                   <div
                     class="com-d grid grid-cols-1 gap-4 justify-items-start content-center p-5 border-b border-[#F5F8FF] text-black text-sm font-normal">
-                    {{--<img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
-              {{--    <img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
-              {{--        <img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
-              {{--            <img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">--}}
+                    
+              
+              
+              
               <div class="py-2 text-black text-sm font-normal">${item.tv.channel_count}</div>
                                     <div class="py-2 text-black text-sm font-normal">${item.tv.channel_count_hd}</div>
 
-                                    ${item.tv.extra.tv_app == true ? `<img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">` :"No" }
-                                     ${item.tv.extra.video_on_demand == true ? `<img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">` :"No" }
+                                    ${item.tv.extra.tv_app == true ? `<img src="<?php echo e(asset('/frontend/assets/img/green-tick.svg')); ?>" class="h-4 w-4" alt="icon">` :"No" }
+                                     ${item.tv.extra.video_on_demand == true ? `<img src="<?php echo e(asset('/frontend/assets/img/green-tick.svg')); ?>" class="h-4 w-4" alt="icon">` :"No" }
 
 
                 </div>
@@ -3537,7 +3526,7 @@ combi_providers=${ConvertToString}`;
                                     <div class="py-2 text-black text-sm font-normal">€ ${item.phone.tariff_minute_fixed}</div>
                                      <div class="py-2 text-black text-sm font-normal">€ ${item.phone.tariff_minute_mobile}</div>
 
-                                    ${item.phone.number_retention == true ? `<img src="{{asset('/frontend/assets/img/green-tick.svg')}}" class="h-4 w-4" alt="icon">` :"No" }
+                                    ${item.phone.number_retention == true ? `<img src="<?php echo e(asset('/frontend/assets/img/green-tick.svg')); ?>" class="h-4 w-4" alt="icon">` :"No" }
 
 
 
@@ -3982,3 +3971,4 @@ combi_providers=${ConvertToString}`;
         })
     </script>
 </div>
+<?php /**PATH /home/riad/Documents/bereken-laravel/resources/views/livewire/internet/choose-package.blade.php ENDPATH**/ ?>

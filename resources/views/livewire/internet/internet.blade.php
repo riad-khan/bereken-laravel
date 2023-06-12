@@ -1,4 +1,4 @@
-@php
+{{-- @php
     $seo_data = DB::table('seo_data_tables')->where('page','=','Internet')->get();
 @endphp
 @section('meta')
@@ -12,7 +12,7 @@
     <script>
         {!! html_entity_decode($seo_data[0]->structured_data) !!}
     </script>
-@endsection
+@endsection --}}
 <div>
     <section class="hero bg-[#F5F8FF] pt-20 p-4 md:pt-12 md:p-12 w-full items-center mx-auto">
         <div class="container mx-auto max-w-screen-xl">

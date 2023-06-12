@@ -10,11 +10,13 @@ class VatRatings extends Component
     public $stars ='';
     public $avgRating;
     public $reviewCount;
+    public $vat;
     public function render()
     {
         return view('livewire.components.vats.vat-ratings');
     }
-    public function mount(){
+    public function mount($vat){
+        $this->vat=$vat;
         for($i =1; $i <=5; $i++){
             $this->stars .= '<svg id="star" onclick="test('.$i.')" aria-hidden="true" class="modal-star w-5 h-5  text-gray-300 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <title>Fifth star</title>
@@ -23,8 +25,8 @@ class VatRatings extends Component
         </svg>';
         }    
 
-        $rate = DB::select('SELECT AVG(ratings) AS rate FROM ratings WHERE `calculator_id` = 2;');
-        $count = DB::select('SELECT COUNT(`ratings`) AS total FROM ratings WHERE `calculator_id` = 2;');
+        $rate = DB::select('SELECT AVG(ratings) AS rate FROM ratings WHERE calculator_id = '.$this->vat.';');
+        $count = DB::select('SELECT COUNT(`ratings`) AS total FROM ratings WHERE calculator_id = '.$this->vat.';');
 
         $this->avgRating = $rate;
         $this->reviewCount = $count;

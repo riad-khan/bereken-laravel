@@ -21,7 +21,7 @@ class BmiCalculator extends Component
     ];
     public function render()
     {
-        $bmiDetails = DB::table('bmis')->limit(1)->get();
+        $bmiDetails = DB::table('bmis')->limit(1)->orderBy('id','ASC')->get();
         return view('livewire.calculators.b-m-i.bmi-calculator', ['details' => $bmiDetails]);
     }
     public function submit()

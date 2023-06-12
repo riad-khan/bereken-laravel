@@ -194,6 +194,23 @@ if (! isset($_instance)) {
 echo $html;
 ?>
 
+    <section class="bg-white w-full p-4 md:p-12">
+    <div class="container mx-auto max-w-screen-xl">
+        <!-- container start -->
+        <div class="section-title text-center ">
+            <h2 class="text-[32px] leading-[38.4px] font-bold text-[#253F73] p-4 sm:pb-16  sm:pt-4">Berekenen en Vergelijken</h2>
+        </div>
+        <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="w-full md:w-1/2 order-2 md:order-1">
+                    <h4 class="text-[#253F73] text-2xl font-semibold mb-8">Van bmi berekenen tot aan vergelijkingen; vergelijk bij Bereken.nl</h4>
+                    <p class="text-[#2B3F70] font-normal text-base mb-8">In Nederland voeren Ziggo en KPN de boventoon. Heb je wel eens gekeken naar abonnementen van minder bekende providers? We zijn namelijk gezegend met enkele minder bekende providers die eveneens abonnementen op het gebied van internet, tv, bellen en telefonie aanbieden.</p> <p class="text-[#2B3F70] font-normal text-base">Verkrijg dankzij onze vergelijker een goed overzicht van alle mogelijkheden en maak zodoende de juiste keuze. Daarbij helpen we jou ook graag met het overstappen naar een andere provider.</p>
+                </div>
+                <div class="w-full md:w-1/2 text-right flex justify-end order-1 mb-8 md:mb-0 md:order-2">
+                    <img src="images/001.png" alt="">
+                </div>
+        </div>
+    </div><!-- container end -->
+</section>
 
     
 
@@ -217,7 +234,50 @@ echo $html;
     <?php else: ?>
         <p></p>
     <?php endif; ?>
+    <section class="bg-white w-full p-4 md:p-12 pb-[150px] pt-[100px] md:pb-[200px]">
+        <div class="container mx-auto max-w-screen-xl">
+            <!-- container start -->
+            <div class="section-title text-center">
+                <h4 class="text-[32px] leading-[38.4px] font-bold text-[#253F73] p-4 sm:pb-16  sm:pt-4  ribbon-s relative">Berekeningen <span class="title-ribbon">Nieuw!</span></h4>
+            </div>
+                <div class="">
+                <div class="flex flex-col md:flex-row items-center justify-center text-center md:text-left md:justify-between">
+                    <div class="single-calculation-info" >
+                        <div class="">
+                                <a href="#" class="text-[#253F73] font-normal text-base md:text-[21px] block mb-2 underline">Watt naar kWh</a>
+                                <a href="#" class="text-[#253F73] font-normal text-base md:text-[21px] block mb-2 underline">KPA naar bar</a>
+                                <a href="#" class="text-[#253F73] font-normal text-base md:text-[21px] block mb-2 underline">Inhoud zwembad berekenen</a>
+                                <a href="#" class="text-[#253F73] font-normal text-base md:text-[21px] block mb-2 underline">Hardloopsnelheid berekenen</a>
+                                <a href="#" class="text-[#253F73] font-normal text-base md:text-[21px] block mb-2 underline">MB naar KB</a>
+                                <a href="#" class="text-[#253F73] font-normal text-base md:text-[21px] block mb-2 underline">M2 naar M3</a>
+                            </div>
 
+                    </div>    
+                    <div class="single-calculation-info" >
+                        <div class="">
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">Lloan repayment amount</a>
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">Amount of debt</a>
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">Wallpaper rolls</a>
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">Gas costs</a>
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">Garnishment-free foot</a>
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">Your smoking</a>
+                            </div>
+
+                    </div>    
+                    <div class="single-calculation-info" >
+                        <div class="">
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">BMI guys</a>
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">BMI child</a>
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">BMI male</a>
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">BMI calculate girls</a>
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">BMI woman</a>
+                                <a href="#" class="text-[#253F73] font-normal text-[21px] block mb-2 underline">BMR</a>
+                            </div>
+
+                    </div>    
+                </div>
+        </div>
+    </section>
     <?php if($settings[0]->show_contact_us_section == 1): ?>
         <?php
 if (! isset($_instance)) {

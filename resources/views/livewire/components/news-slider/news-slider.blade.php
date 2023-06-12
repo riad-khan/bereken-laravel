@@ -15,7 +15,7 @@
                
                 <div class="items">
                     <a href="/news/{{$row->slug}}-{{$row->id}}" class="flex  mb-3 p-2 flex-col transition-all hover:bg-[#EBF1FF] border border-[#EBF1FF] hover:border-[#EBF1FF] rounded-lg hover:shadow md:flex-col  bg-white">
-                        <img class="object-cover rounded-t-lg h-52 h-40 md:rounded-md" src="{{url($row->thumbnill_image)}}" alt="image">
+                        <img class="object-cover rounded-t-lg h-52 h-40 md:rounded-md" src="{{env('STRAPI_URL') . $row->thumbnill_image}}" alt="image">
 
                         <div class="flex flex-col justify-between px-2 leading-normal">
                             <h5 class="mb-2 text-base font-semibold tracking-tight text-[#2B313B]">{{$row->title}}</h5>
