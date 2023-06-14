@@ -37,6 +37,7 @@
                     <div class="main-area w-full">
                         
             <div class="section-title text-center ">
+                
                 <h1 class="text-[24px] font-semibold mb-4 p-5 text-[#2B313B] sm:pb-6  sm:pt-4">If your question remains unanswered within our frequently asked questions, please feel free to contact us via the contact form.</h1>
             </div>
                         <div class="main-inner w-full flex p-5">

@@ -23,7 +23,7 @@
         
         <div class="px-3 items-center bg-white transition-all  py-4 my-2 text-center">
             <a href="/news"
-                class="shadow-btn arrow-white inline-flex text-xs font-semibold text-center text-[#0052FE]  hover:text-white ">
+                class="shadow-btn arrow-white inline-flex text-xs font-semibold text-center border-t border-[#F5F8FF] text-[#0052FE]  hover:text-white ">
                More News <img src="{{asset('frontend/assets/img/icons/arrow-right-blue.svg')}}" class="ml-2"
                     alt="arrow-icon">
             </a>

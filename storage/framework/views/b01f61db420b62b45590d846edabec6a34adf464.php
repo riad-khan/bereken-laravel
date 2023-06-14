@@ -1,18 +1,4 @@
-{{-- @php
-    $seo_data = DB::table('seo_data_tables')->where('page','=','Internet')->get();
-@endphp
-@section('meta')
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{$seo_data[0]->title}}</title>
-    <meta name="description" content="{{$seo_data[0]->seo_meta}}">
-    <meta name="description" content="{{$seo_data[0]->seo_keywords}}">
-
-    <script>
-        {!! html_entity_decode($seo_data[0]->structured_data) !!}
-    </script>
-@endsection --}}
 <div>
     <section class="hero bg-[#F5F8FF] pt-20 p-4 md:pt-12 md:p-12 w-full items-center mx-auto">
         <div class="container mx-auto max-w-screen-xl">
@@ -21,17 +7,17 @@
 
                 <div class="flex-none md:flex md:justify-around">
                     <div class="w-full md:w-80 flex flex-col">
-                        <h1 class="flex items-center text-base font-normal text-[#26BA65] mb-5"><img src="{{asset('/frontend/assets/img/verified.svg')}}" class="w-6 h-6 mr-2" alt="icon"> Save costs • Independent • Personal</h1>
+                        <h1 class="flex items-center text-base font-normal text-[#26BA65] mb-5"><img src="<?php echo e(asset('/frontend/assets/img/verified.svg')); ?>" class="w-6 h-6 mr-2" alt="icon"> Save costs • Independent • Personal</h1>
                         <h2 class="text-[#2B313B] text-2xl font-semibold mb-5">Compare Internet & TV packages</h2>
                         <p class="text-[#6C7A93] text-base font-normal mb-5">Find the best and cheapest internet and TV at your address</p>
                         
                         <div class="pop-form-main" x-data="{ open: false }">
                             
-                        <button type="button"  @click="open = ! open" class="outline-btn btn-translate-z flex md:hidden items-center w-fit bg-[#F9FBFF] text-white text-base font-bold py-2.5 px-6 mb-6">Get Started <img class="ml-4  " src="{{asset('/frontend/assets/img/arrow-white.svg')}}" alt="arrow-icon"></button>
+                        <button type="button"  @click="open = ! open" class="outline-btn btn-translate-z flex md:hidden items-center w-fit bg-[#F9FBFF] text-white text-base font-bold py-2.5 px-6 mb-6">Get Started <img class="ml-4  " src="<?php echo e(asset('/frontend/assets/img/arrow-white.svg')); ?>" alt="arrow-icon"></button>
 
                             <div class="pop-form absolute md:relative" x-show="open" x-transition>
                                 <div class="relative flex flex-col bg-[#F9FBFF] inner-area border border-[#F5F8FF] rounded-2xl p-5">
-                                    <button class="absolute right-2 top-2 md:hidden" @click="open = false"><img src="{{asset('/frontend/assets/img/close.svg')}}" alt="icon"></button>
+                                    <button class="absolute right-2 top-2 md:hidden" @click="open = false"><img src="<?php echo e(asset('/frontend/assets/img/close.svg')); ?>" alt="icon"></button>
                                     
                                         
                         <div :class="{'block': open, 'hidden': !open}" class="hidden form-area p-5 rounded-2xl border border-[#F5F8FF] bg-white">
@@ -76,22 +62,22 @@
                         
                         <h3 class="text-[#2B313B] text-sm  font-semibold mb-3">We’re compare</h3>
                         <div class="grid grid-cols-5 gap-2">
-                            <img src="{{('/frontend/assets/img/internet/01.svg')}}" alt="icon">
-                            <img src="{{('/frontend/assets/img/internet/02.svg')}}" alt="icon">
-                            <img src="{{('/frontend/assets/img/internet/03.svg')}}" alt="icon">
-                            <img src="{{('/frontend/assets/img/internet/04.svg')}}" alt="icon">
-                            <img src="{{('/frontend/assets/img/internet/05.svg')}}" alt="icon">
-                            <img src="{{('/frontend/assets/img/internet/06.svg')}}" alt="icon">
-                            <img src="{{('/frontend/assets/img/internet/07.svg')}}" alt="icon">
-                            <img src="{{('/frontend/assets/img/internet/08.svg')}}" alt="icon">
-                            <img src="{{('/frontend/assets/img/internet/09.svg')}}" alt="icon">
-                            <img src="{{('/frontend/assets/img/internet/10.svg')}}" alt="icon">
+                            <img src="<?php echo e(('/frontend/assets/img/internet/01.svg')); ?>" alt="icon">
+                            <img src="<?php echo e(('/frontend/assets/img/internet/02.svg')); ?>" alt="icon">
+                            <img src="<?php echo e(('/frontend/assets/img/internet/03.svg')); ?>" alt="icon">
+                            <img src="<?php echo e(('/frontend/assets/img/internet/04.svg')); ?>" alt="icon">
+                            <img src="<?php echo e(('/frontend/assets/img/internet/05.svg')); ?>" alt="icon">
+                            <img src="<?php echo e(('/frontend/assets/img/internet/06.svg')); ?>" alt="icon">
+                            <img src="<?php echo e(('/frontend/assets/img/internet/07.svg')); ?>" alt="icon">
+                            <img src="<?php echo e(('/frontend/assets/img/internet/08.svg')); ?>" alt="icon">
+                            <img src="<?php echo e(('/frontend/assets/img/internet/09.svg')); ?>" alt="icon">
+                            <img src="<?php echo e(('/frontend/assets/img/internet/10.svg')); ?>" alt="icon">
                         </div>
                     </div>
                     <div class="w-full hidden md:block md:w-80">
                         <div class="form-area p-5 rounded-2xl border border-[#F5F8FF] bg-white">
-                            <form action="{{url('/internet-package')}}" method="post" class="flex flex-col">
-                                @csrf
+                            <form action="<?php echo e(url('/internet-package')); ?>" method="post" class="flex flex-col">
+                                <?php echo csrf_field(); ?>
                                 <div class="mb-3">
                                     <label for="" class="block mb-2 text-sm  font-normal text-[#2B313B]">Type</label>
                                     
@@ -140,8 +126,8 @@
             <div class="flex flex-col lg:flex-row items-start justify-between">
                 <div class="w-full lg:w-80 mb-4 md:mb-0">
                     <div class="p-[19px] rounded-2xl border border-[#F5F8FF] bg-white">
-                        <form action="{{url('/internet-package')}}" method="post" class="flex flex-col">
-                            @csrf
+                        <form action="<?php echo e(url('/internet-package')); ?>" method="post" class="flex flex-col">
+                            <?php echo csrf_field(); ?>
                             <div class="mb-5 mt-2">
                                 <label for="" class="block mb-1 text-sm font-normal text-[#2B313B]">Type</label>
 
@@ -322,18 +308,18 @@
             <h2 class="text-center font-semibold w-fit md:w-[450px] text-[32px] text-[#2B313B] leading-none pb-6 my-6  mx-auto">Advantages of comparing Internet Packages</h2>
             <div class="flex flex-col lg:flex-row items-center justify-between pb-8">
                 <div class="bg-white w-full mb-4 lg:mb-0 md:w-[308px] p-5 flex flex-col text-center border border-[#F5F8FF] rounded-2xl">
-                    <img src="{{('/frontend/assets/img/internet/001.svg')}}" class="pt-4 h-auto w-20 mx-auto mb-4" alt="icon">
+                    <img src="<?php echo e(('/frontend/assets/img/internet/001.svg')); ?>" class="pt-4 h-auto w-20 mx-auto mb-4" alt="icon">
                     <h3 class="my-3 text-[#2B313B] text-2xl font-semibold">Good Overview</h3>
                     <p class="text-[#6C7A93] text-base font-normal pb-4">Choosing the right internet package starts with a good overview.</p>
                 </div>                
                 <div class="bg-white w-full mb-4 lg:mb-0 md:w-[308px] p-5 flex flex-col text-center border border-[#F5F8FF] rounded-2xl">
-                    <img src="{{('/frontend/assets/img/internet/002.svg')}}" class="pt-4 h-auto w-20 mx-auto mb-4" alt="icon">
+                    <img src="<?php echo e(('/frontend/assets/img/internet/002.svg')); ?>" class="pt-4 h-auto w-20 mx-auto mb-4" alt="icon">
                     <h3 class="my-3 text-[#2B313B] text-2xl font-semibold">Choose the Best Deal</h3>
                     <p class="text-[#6C7A93] text-base font-normal pb-4">Thanks to the handy overview of the internet packages comparator.</p>
                 </div>
                 
                 <div class="bg-white w-full mb-4 lg:mb-0 md:w-[308px] p-5 flex flex-col text-center border border-[#F5F8FF] rounded-2xl">
-                    <img src="{{('/frontend/assets/img/internet/003.svg')}}" class="pt-4 h-auto w-20 mx-auto mb-4" alt="icon">
+                    <img src="<?php echo e(('/frontend/assets/img/internet/003.svg')); ?>" class="pt-4 h-auto w-20 mx-auto mb-4" alt="icon">
                     <h3 class="my-3 text-[#2B313B] text-2xl font-semibold">Save Costs</h3>
                     <p class="text-[#6C7A93] text-base font-normal pb-4">Because you have all the information available about each deal.</p>
                 </div>
@@ -349,18 +335,32 @@
                     <p class="text-[#6C7A93] text-base font-normal pb-4 mb-8">A health insurance that also reimburses your medicines? A greener energy supplier? Or the best mortgage? Whatever you need, we make comparing fun and easy. We love nothing more than making complex choices simple. That saves you a lot of research and at the bottom of the line usually a lot of premium.</p>
                     <p class="text-[#6C7A93] text-base font-normal pb-4 mb-8">How good does it feel when you save with the certainty that you have arranged your affairs better? You won't know that until you just give it a try. So start today. Welcome to Independer.</p>
                     <span class="flex flex-row items-center">
-                        <img src="{{('/frontend/assets/img/internet/support-01.svg')}}" class="mr-4" alt="logo">
-                        <img src="{{('/frontend/assets/img/internet/support-02.svg')}}" alt="logo">
+                        <img src="<?php echo e(('/frontend/assets/img/internet/support-01.svg')); ?>" class="mr-4" alt="logo">
+                        <img src="<?php echo e(('/frontend/assets/img/internet/support-02.svg')); ?>" alt="logo">
                     </span>
                 </div>
                 <div class="hidden md:block w-full md:w-1/2 pl-4 mb-4 lg:mb-0">
-                    <img src="{{asset('/frontend/assets/img/internet/support-sec-img.svg')}}" alt="image">
+                    <img src="<?php echo e(asset('/frontend/assets/img/internet/support-sec-img.svg')); ?>" alt="image">
                 </div>
             </div>
         </div>
     </section>
 
-    <livewire:components.news-slider.news-slider />
+    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.news-slider.news-slider', [])->html();
+} elseif ($_instance->childHasBeenRendered('l2950705176-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l2950705176-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l2950705176-0');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l2950705176-0');
+} else {
+    $response = \Livewire\Livewire::mount('components.news-slider.news-slider', []);
+    $html = $response->html();
+    $_instance->logRenderedChild('l2950705176-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 
       <!-- contact-us - start -->
       <section class="bg-[#F5F8FF] w-full p-4 md:p-4">
@@ -368,7 +368,7 @@
             <div class="flex p-6 flex-col items-center ">
                 <div class="content text-center sm:text-left flex-none sm:flex sm:justify-center sm:items-center">
                     <div class="img-box w-full sm:w-2/5 order-none mb-6 sm:m-0 sm:order-last">
-                        <img src="{{asset('frontend/assets/img/contact-us.svg')}}" class="mx-auto w-full sm:mx-0" alt="image">
+                        <img src="<?php echo e(asset('frontend/assets/img/contact-us.svg')); ?>" class="mx-auto w-full sm:mx-0" alt="image">
                     </div>
                     <div class="text-content text-center sm:w-3/5 sm:text-left">
                         <h6 class="text-2xl sm:text-xl lg:text-2xl font-normal mb-8 text-[#2B313B]">We are best reached
@@ -382,11 +382,11 @@
     </section>
 
 
-    <script src="{{asset('/frontend/assets/js/jquery/jquery.min.js')}}"></script>
+    <script src="<?php echo e(asset('/frontend/assets/js/jquery/jquery.min.js')); ?>"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
-    <script type="text/javascript" src="{{asset('/frontend/assets/js/slick/slick.min.js')}}"></script>
+    <script type="text/javascript" src="<?php echo e(asset('/frontend/assets/js/slick/slick.min.js')); ?>"></script>
     <script>        
             //date 
             flatpickr("#a-date", {
@@ -410,8 +410,8 @@
           slidesToShow: 3,
           slidesToScroll: 1,
           arrows: true,
-          prevArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><img src="{{asset('/frontend/assets/img/slider/angle-right.svg')}}" class="h-[27px] w-8" alt="previous-arrow"></button>',
-          nextArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><img src="{{asset('/frontend/assets/img/slider/angle-left.svg')}}" class="h-[27px] w-8" alt="next-arrow"></button>',
+          prevArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button"><img src="<?php echo e(asset('/frontend/assets/img/slider/angle-right.svg')); ?>" class="h-[27px] w-8" alt="previous-arrow"></button>',
+          nextArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button"><img src="<?php echo e(asset('/frontend/assets/img/slider/angle-left.svg')); ?>" class="h-[27px] w-8" alt="next-arrow"></button>',
           autoplay: true,
           autoplaySpeed: 3000,
           responsive: [
@@ -625,3 +625,4 @@ class RollCounterRange {
 }
     </script>
 </div>
+<?php /**PATH C:\Users\saleh\OneDrive\Desktop\Hassn Vai\Breken.nl\New-Design\bereken-laravel\resources\views/livewire/internet/internet.blade.php ENDPATH**/ ?>

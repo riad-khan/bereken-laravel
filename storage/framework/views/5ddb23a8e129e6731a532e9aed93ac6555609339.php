@@ -34,7 +34,7 @@
 
                 </div>
                 <p class="ml-2 text-2xl font-bold text-[#2B313B] mr-3"><?php echo e(round($avgRating[0]->rate)); ?> </p>
-                <a href="#" class="text-xs font-normal text-[#2B313B] hover:no-underlinev">
+                <a href="#" class="text-xs font-normal text-[#2B313B] hover:no-underline">
                     <?php echo e($reviewCount[0]->total); ?>
 
                     Reviews</a>
