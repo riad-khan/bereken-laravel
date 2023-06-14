@@ -1,4 +1,4 @@
-@php
+<?php
     $seo_data_sql = 'select 
                         b.id as component_id,
                         b.meta_title,
@@ -23,36 +23,36 @@ from components_shared_meta_socials a
     
     $seo_social = DB::select($seo_social_sql, [$seo_data[0]->component_id]);
     
-@endphp
-@section('meta')
+?>
+<?php $__env->startSection('meta'); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ $seo_data[0]->meta_title }} </title>
-    <meta name="description" content="{{ $seo_data[0]->meta_description }}">
-    <meta name="keywords" content="{{ $seo_data[0]->keywords }}">
+    <title><?php echo e($seo_data[0]->meta_title); ?> </title>
+    <meta name="description" content="<?php echo e($seo_data[0]->meta_description); ?>">
+    <meta name="keywords" content="<?php echo e($seo_data[0]->keywords); ?>">
 
-    @foreach ($seo_social as $social_meta)
-        @if ($social_meta->social_network == 'Facebook')
-            <meta property="og:title" content="{{ $social_meta->title }}">
-            <meta property="og:description" content="{{ $social_meta->description }}">
-            <meta property="og:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-            {{-- <meta property="og:url" content="URL of your page">
-   <meta property="og:type" content="website"> --}}
-        @else
-            <meta name="twitter:card" content="{{$social_meta->description}}">
-            <meta name="twitter:title" content="{{$social_meta->title}}">
-            <meta name="twitter:description" content="{{$social_meta->description}}">
-            <meta name="twitter:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-        @endif
-    @endforeach
+    <?php $__currentLoopData = $seo_social; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $social_meta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if($social_meta->social_network == 'Facebook'): ?>
+            <meta property="og:title" content="<?php echo e($social_meta->title); ?>">
+            <meta property="og:description" content="<?php echo e($social_meta->description); ?>">
+            <meta property="og:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+            
+        <?php else: ?>
+            <meta name="twitter:card" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:title" content="<?php echo e($social_meta->title); ?>">
+            <meta name="twitter:description" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+        <?php endif; ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-    <link rel="canonical" href="{{ $seo_data[0]->canonical_url }}">
+    <link rel="canonical" href="<?php echo e($seo_data[0]->canonical_url); ?>">
 
     <script>
-        {!! html_entity_decode($seo_data[0]->structured_data) !!}
+        <?php echo html_entity_decode($seo_data[0]->structured_data); ?>
+
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
 <div>
 
     <section class="hero bg-white  pt-20 p-4 md:pt-12 md:p-12 md:pb-0 w-full items-center mx-auto">
@@ -120,26 +120,26 @@ from components_shared_meta_socials a
                 <div class="main-inner p-5 border border-[#F5F8FF] rounded-t-2xl">
                     <h3 class="my-5 text-2xl font-semibold">Result</h3>
                     <div class="flex-col sm:flex-row flex items-start sm:items-center justify-between">
-                        @if ($bmi < 16)
+                        <?php if($bmi < 16): ?>
                             <span style="opacity: 0.7"
                                 class="bg-[red] text-[white]   text-base font-normal mr-2 px-3 py-2 rounded-lg">Your BMI
-                                is: <strong>{{ $bmi }}</strong> Severe Thinness</span>
-                        @elseif ($bmi < 18.5 && $bmi >= 16)
+                                is: <strong><?php echo e($bmi); ?></strong> Severe Thinness</span>
+                        <?php elseif($bmi < 18.5 && $bmi >= 16): ?>
                             <span
                                 class="bg-[#FFF4E6] text-[#FF7800]  text-base font-normal mr-2 px-3 py-2 rounded-lg">Your
-                                BMI is: <strong>{{ $bmi }}</strong> Mild Thinness</span>
-                        @elseif ($bmi < 25 && $bmi >= 18.5)
+                                BMI is: <strong><?php echo e($bmi); ?></strong> Mild Thinness</span>
+                        <?php elseif($bmi < 25 && $bmi >= 18.5): ?>
                             <span class="bg-[green] text-[#ffff]  text-base font-normal mr-2 px-3 py-2 rounded-lg">Your
-                                BMI is: <strong>{{ $bmi }}</strong> Normal</span>
-                        @elseif ($bmi <= 30 && $bmi >= 25)
+                                BMI is: <strong><?php echo e($bmi); ?></strong> Normal</span>
+                        <?php elseif($bmi <= 30 && $bmi >= 25): ?>
                             <span
                                 class="bg-[#FFF4E6] text-[#FF7800]  text-base font-normal mr-2 px-3 py-2 rounded-lg">Your
-                                BMI is: <strong>{{ $bmi }}</strong> Overweight</span>
-                        @else
+                                BMI is: <strong><?php echo e($bmi); ?></strong> Overweight</span>
+                        <?php else: ?>
                             <span style="opacity: 0.7"
                                 class="bg-[red] text-[white]  text-base font-normal mr-2 px-3 py-2 rounded-lg">Your
-                                BMI is: <strong>{{ $bmi }} </strong> Obese</span>
-                        @endif
+                                BMI is: <strong><?php echo e($bmi); ?> </strong> Obese</span>
+                        <?php endif; ?>
 
 
 
@@ -160,12 +160,13 @@ from components_shared_meta_socials a
 
                         <!-- info area start -->
                         <div class="single-info">
-                            <h2 class="text-[#2B313B] text-base font-semibold mb-3">{{$result[0]->result_title}}
-                            </h2>
-                            <p class="text-[#6C7A93] font-normal text-sm mb-6 leading-7">{!! html_entity_decode($result[0]->result_content) !!}</p>
+                            <h2 class="text-[#2B313B] text-base font-semibold mb-3"><?php echo e($result[0]->result_title); ?>
 
-                            <p class="bmi-msg text-base font-normal text-[#26BA65] my-4">Your ideal weight is between: {{$idealStart}}kg to
-                                {{$idealEnd}}kg</p>
+                            </h2>
+                            <p class="text-[#6C7A93] font-normal text-sm mb-6 leading-7"><?php echo html_entity_decode($result[0]->result_content); ?></p>
+
+                            <p class="bmi-msg text-base font-normal text-[#26BA65] my-4">Your ideal weight is between: <?php echo e($idealStart); ?>kg to
+                                <?php echo e($idealEnd); ?>kg</p>
                             <div class="bmi-chart grid grid-cols-4 gap-2">
                                 <div class="flex flex-col">
                                     <div class="py-1 rounded bg-[#A4BCE6]"></div>
@@ -199,7 +200,7 @@ from components_shared_meta_socials a
                         </div>
 
 
-                        @php
+                        <?php
                             $sql = 'select 
                                         b.id,
                                         b.title,
@@ -208,29 +209,30 @@ from components_shared_meta_socials a
                                         left join news b on b.id = a.news_section_id
                                         ';
                             $news = DB::select($sql);
-                        @endphp
+                        ?>
 
                         <h2 class="text-[#2B313B] text-base font-semibold mt-4 mb-3">Most Read</h2>
 
-                        @foreach ($news as $item )
-                        <a href="/news/{{$item->slug}}-{{$item->id}}" class="text-[#0052FE] font-normal text-xs block mb-2 underline"> {{$item->title}}</a>
-                        @endforeach
+                        <?php $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <a href="/news/<?php echo e($item->slug); ?>-<?php echo e($item->id); ?>" class="text-[#0052FE] font-normal text-xs block mb-2 underline"> <?php echo e($item->title); ?></a>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         
                       
                     </div>
                     <div id="load-more" class="transition-all">
                             <div class="single-info py-4">
 
-                                    @php
+                                    <?php
                                         $result_content = DB::table('bmis')->get();
-                                    @endphp
+                                    ?>
 
-                                    {!! html_entity_decode($result_content[0]->result_content) !!}
+                                    <?php echo html_entity_decode($result_content[0]->result_content); ?>
+
                             
                             </div>
                             
                             <button id="load-more-btn" type="button" class="load-btn-area w-full  inline-block transition-all scale hover:scale-105 mb-4 text-center md:hidden text-[10px] 		font-semibold text-center text-[#0052FE] hover:text-blue-700  ">
-                                View More <img src="{{asset('frontend/assets/img/icons/arrow-right-blue.svg')}}" class="ml-2 inline-block" alt="arrow-icon">
+                                View More <img src="<?php echo e(asset('frontend/assets/img/icons/arrow-right-blue.svg')); ?>" class="ml-2 inline-block" alt="arrow-icon">
                              </button>
                             </div>
                             <!-- hidden-element end -->
@@ -239,7 +241,7 @@ from components_shared_meta_socials a
                                 <div class="w-full lg:w-auto more-links">
                                     <h5 class="  font-bold text-sm text-black mb-5">Other visitors also calculated</h5>
                                     <div class="tag-area flex-wrap flex md:flex-none">
-                                        @php
+                                        <?php
                                        $sql = 'select 
                                                     b.calculator_name,
                                                     b.link,
@@ -250,39 +252,39 @@ from components_shared_meta_socials a
                                                     left join files d on d.id = c.file_id
                                                     where a.bmi_id = ?';
                                         $list = DB::select($sql,[$result_content[0]->id])
-                                    @endphp
+                                    ?>
 
-                                    @foreach ($list as $item )
+                                    <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         
                                    
 
-                                    <a target="_blank" href="{{$item->link}}"
-                                        class="text-[#0052FE] bg-white border border-[#0052FE] font-normal rounded-md transition-all text-sm px-2.5 py-1 text-center mr-2 mb-2">{{$item->calculator_name}}</a>
+                                    <a target="_blank" href="<?php echo e($item->link); ?>"
+                                        class="text-[#0052FE] bg-white border border-[#0052FE] font-normal rounded-md transition-all text-sm px-2.5 py-1 text-center mr-2 mb-2"><?php echo e($item->calculator_name); ?></a>
 
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         
                                     </div>
                                 </div>
-                                @php
+                                <?php
                                     $fb_url='https://www.facebook.com/sharer/sharer.php?u='.url()->current().'';
-                                @endphp
+                                ?>
                                 <div class="w-full mt-4 lg:mt-0 lg:w-auto social-links text-left lg:text-right">
                                     <h5 class="font-bold text-sm text-black mb-5">Share this Calculation</h5>
                                     <ul class="flex flex-row justify-start md:justify-end">
-                                        <li class="flex"> <a href="{{$fb_url}}" target="_blank" class=" ml-2"><span
+                                        <li class="flex"> <a href="<?php echo e($fb_url); ?>" target="_blank" class=" ml-2"><span
                                                     class="flex relative">
                                                     <span
                                                         class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span><img
-                                                        class=" h-5 w-5" src="{{asset('frontend/assets/img/social/facebook.svg')}}"
+                                                        class=" h-5 w-5" src="<?php echo e(asset('frontend/assets/img/social/facebook.svg')); ?>"
                                                         alt=""> </span></a></li>
                                         <li class="flex ml-2"><a href="#" class=" ml-2"><img
                                                     class="blob infinity rounded-full h-5 w-5"
-                                                    src="{{asset('frontend/assets/img/social/twitter.svg')}}" alt=""> </a></li>
+                                                    src="<?php echo e(asset('frontend/assets/img/social/twitter.svg')); ?>" alt=""> </a></li>
                                         <li class="flex ml-2"> <a href="#" class=" ml-2"><span
                                                     class="flex relative">
                                                     <span
                                                         class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span><img
-                                                        class="h-5 w-5" src="{{asset('frontend/assets/img/social/instagram.svg')}}"
+                                                        class="h-5 w-5" src="<?php echo e(asset('frontend/assets/img/social/instagram.svg')); ?>"
                                                         alt=""></span> </a></li>
                                     
                                     </ul>
@@ -295,13 +297,69 @@ from components_shared_meta_socials a
             <div class="side-bar basis-full md:basis-4/12">
                 <div class="inner-area ml-1 lg:ml-4 p-2 md:p-0">
                   
-                    <livewire:components.b-m-i.featured-calculators :bmi="$result_content[0]->id" />
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.b-m-i.featured-calculators', ['bmi' => $result_content[0]->id])->html();
+} elseif ($_instance->childHasBeenRendered('l2948633092-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l2948633092-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l2948633092-0');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l2948633092-0');
+} else {
+    $response = \Livewire\Livewire::mount('components.b-m-i.featured-calculators', ['bmi' => $result_content[0]->id]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l2948633092-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                    
 
-                    <livewire:components.b-m-i.related-articles :bmi="$result_content[0]->id"  />
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.b-m-i.related-articles', ['bmi' => $result_content[0]->id])->html();
+} elseif ($_instance->childHasBeenRendered('l2948633092-1')) {
+    $componentId = $_instance->getRenderedChildComponentId('l2948633092-1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l2948633092-1');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l2948633092-1');
+} else {
+    $response = \Livewire\Livewire::mount('components.b-m-i.related-articles', ['bmi' => $result_content[0]->id]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l2948633092-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 
-                    <livewire:components.b-m-i.bmi-faq :bmi="$result_content[0]->id" />
-                    <livewire:components.b-m-i.bmi-ratings :bmi="$result_content[0]->id" />
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.b-m-i.bmi-faq', ['bmi' => $result_content[0]->id])->html();
+} elseif ($_instance->childHasBeenRendered('l2948633092-2')) {
+    $componentId = $_instance->getRenderedChildComponentId('l2948633092-2');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l2948633092-2');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l2948633092-2');
+} else {
+    $response = \Livewire\Livewire::mount('components.b-m-i.bmi-faq', ['bmi' => $result_content[0]->id]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l2948633092-2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.b-m-i.bmi-ratings', ['bmi' => $result_content[0]->id])->html();
+} elseif ($_instance->childHasBeenRendered('l2948633092-3')) {
+    $componentId = $_instance->getRenderedChildComponentId('l2948633092-3');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l2948633092-3');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l2948633092-3');
+} else {
+    $response = \Livewire\Livewire::mount('components.b-m-i.bmi-ratings', ['bmi' => $result_content[0]->id]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l2948633092-3', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                 </div>
             </div>
             <!-- right-side-area-end -->
@@ -383,3 +441,4 @@ from components_shared_meta_socials a
 
 
 </div>
+<?php /**PATH C:\Users\saleh\OneDrive\Desktop\Hassn Vai\Breken.nl\New-Design\bereken-laravel\resources\views/livewire/calculators/b-m-i/bmi-result.blade.php ENDPATH**/ ?>

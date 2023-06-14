@@ -1,9 +1,9 @@
 <div>
     <div class="faq mb-3 py-2 border rounded-t-2xl border-[#F5F8FF] ">
-        <div class="mx-3 pt-2 pb-3 border-b border-[#F5F8FF] mx-auto md:text-base lg:text-2xl text-2xl font-semibold">
+        <div class="px-5 py-4  text-[#2B313B] mx-auto md:text-base lg:text-2xl text-2xl font-semibold">
             Rate</div>
-        <div class="px-3 items-center font-semibold text- bg-white transition-all opacity-100 hover:opacity-90 py-3">
-            <a class="cursor-pointer" data-modal-target="authentication-modal"
+        <div class="items-center font-semibold text-sm bg-white transition-all opacity-100 hover:opacity-90 px-5 py-4 ">
+            <a class="cursor-pointer " data-modal-target="authentication-modal"
                 data-modal-toggle="authentication-modal">Rate this calculation</a>
 
             <div class="rating-star flex flex-row items-center">
@@ -33,7 +33,7 @@
                     {!! html_entity_decode($rates) !!}
                 </div>
                 <p class="ml-2 text-2xl font-bold text-[#2B313B] mr-3">{{ round($avgRating[0]->rate) }} </p>
-                <a href="#" class="text-xs font-nomrmal text-[#2B313B] hover:no-underlinev">
+                <a href="#" class="text-xs font-normal text-[#2B313B] hover:no-underline">
                     {{ $reviewCount[0]->total }}
                     Reviews</a>
             </div>
@@ -41,7 +41,7 @@
 
         <div class="btn-area mt-3 flex justify-center">
             <a href="#"
-                class="btn-translate-z bg-[#112954] opacity-100 hover:opacity-90 transition text-white flex text-xs font-semibold text-center justify-center items-center rounded py-4 px-2 w-full transition-all ">Need
+                class="btn-translate-z bg-[#112954] opacity-100 hover:opacity-90 transition text-white flex text-xs font-bold text-center justify-center items-center rounded py-4 px-2 w-full transition-all ">Need
                 some help?</a>
         </div>
 

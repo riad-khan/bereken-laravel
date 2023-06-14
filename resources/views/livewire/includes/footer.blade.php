@@ -16,14 +16,14 @@
                 <a href="#" class="flex justify-center md:justify-start items-center">
                     <img src="{{ env('STRAPI_URL') . $footerData[0]->footer_logo }}" class="mr-3 h-9" alt="FlowBite Logo" />
                 </a>
-                <p class="sm:space-y-6 py-2 sm:py-8 text-xs font-normal leading-5 text-[#6C7A93] sm:pr-9">
+                <p class="sm:space-y-6 py-2 sm:py-8 text-sm font-normal leading-5 text-[#2B313B] sm:pr-9">
                    {{ $footerData[0]->footer_content }}
                 </p>
             </div>
             <div class="m-auto mb-6 md:mb-0 w-[80%] grid grid-cols-2 gap-2 sm:justify-between sm:flex sm:basis-1/2 md:basis-2/3 sm:flex-wrap basis-full">
                 <div class="mb-6 md:mb-0">
-                    <h2 class="mb-6 text-base font-semibold text-[#2B313B] ">General</h2>
-                    <ul class="text-xs font-normal leading-5 text-[#6C7A93]">
+                    <h2 class="mb-4 text-base font-semibold text-[#112954] ">General</h2>
+                    <ul class="text-sm font-normal leading-5 text-[#2B313B]">
                         <li class="mb-4">
                             <a href="calculations" target="_blank" class="">Calculations</a>
                         </li>
@@ -39,8 +39,8 @@
                     </ul>
                 </div>
                 <div class="mb-6 md:mb-0">
-                    <h2 class="mb-6 text-base font-semibold text-[#2B313B] ">Insurance</h2>
-                    <ul class="text-xs font-normal leading-5 text-[#6C7A93]">
+                    <h2 class="mb-6 text-base font-semibold text-[#112954] ">Insurance</h2>
+                    <ul class="text-sm font-normal leading-5 text-[#2B313B]">
                         <li class="mb-4">
                             <a href="/car-insurance" class=" ">Car insurance</a>
                         </li>
@@ -56,8 +56,8 @@
                     </ul>
                 </div>
                 <div class="mb-6 md:mb-0">
-                    <h2 class="mb-6 text-base font-semibold text-[#2B313B] ">Energy</h2>
-                    <ul class="text-xs font-normal leading-5 text-[#6C7A93]">
+                    <h2 class="mb-6 text-base font-semibold text-[#112954] ">Energy</h2>
+                    <ul class="text-sm font-normal leading-5 text-[#2B313B]">
                         <li class="mb-4">
                             <a href="#" class="">Energy</a>
                         </li>
@@ -73,8 +73,8 @@
                     </ul>
                 </div>
                 <div class="mb-6 md:mb-0">
-                    <h2 class="mb-6 text-base font-semibold text-[#2B313B] ">Community</h2>
-                    <ul class="text-xs font-normal leading-5 text-[#6C7A93]">
+                    <h2 class="mb-6 text-base font-semibold text-[#112954] ">Community</h2>
+                    <ul class="text-sm font-normal leading-5 text-[#2B313B]">
                         <li class="mb-4 flex">
 
                             <span class="flex relative">
@@ -134,9 +134,13 @@
             </div>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
-        <div class="flex justify-center sm:items-center sm:justify-between">
-            <span class="font-semibold text-[#2B313B] sm:text-center">
+        <div class="flex flex-col md:flex-row gap-6 md:gap-0 justify-center items-center sm:justify-between">
+            <span class="font-bold text-xs text-[#1E3062] sm:text-center">
                 {{$footerData[0]->copyright_text}}
+            </span>
+            <span class="flex items-center gap-8">
+                <img src="/images/image13.png" alt="">
+                <img src="/images/image12.png" alt="">
             </span>
         </div>
     </div>

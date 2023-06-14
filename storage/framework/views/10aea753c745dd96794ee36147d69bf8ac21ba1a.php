@@ -7,8 +7,9 @@
         <div class="container mx-auto max-w-screen-xl">
             <!-- container start -->
             <div class="section-title text-center ">
-                <h2 class="text-[32px] font-semibold text-[#2B313B] p-4 sm:pb-16  sm:pt-4"><?php echo e($title); ?></h2>
+                <h2 class="text-[32px] font-bold text-[#253F73] p-4 sm:pb-8  sm:pt-16"><?php echo e($title); ?></h2>
             </div>
+            <div class="grid grid-cols-2 md:grid-cols-1 gap-5 md:gap-0">
             <?php $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <?php
                 $time;
@@ -33,23 +34,24 @@
               
             ?>
 
-            <ul>
+            <ul class="my-4">
                
             
                  
              
                 <li>
                     <a href="/news/<?php echo e($item->slug); ?>-<?php echo e($item->id); ?>"
-                        class="flex my-2 p-4 md:p-6 flex-col transition-all items-center hover:bg-[#EBF1FF] border border-[#F5F8FF] hover:border-[#EBF1FF] rounded-lg hover:shadow md:flex-row w-full bg-white">
-                        <img class="object-cover w-full rounded-lg h-44 md:h-48 md:w-48"
+                        class="flex my-2 p-[6px] md:p-4 flex-col transition-all items-center justify-start hover:bg-[#EBF1FF] border-2 border-[#F5F8FF] hover:border-[#EBF1FF] rounded-lg hover:shadow md:flex-row w-full bg-white">
+                        <div class=" rounded-lg w-full h-24 sm:h-[204px] sm:w-[255px] overflow-hidden">
+                            <img class="object-cover w-full h-full"
                             src="<?php echo e(env('STRAPI_URL') . $item->image); ?>" alt="image">
+                        </div>
+                        <div class="flex flex-col w-full justify-between py-2 md:py-0 md:px-4 leading-normal">
+                            <h5 class="mb-0 md:mb-2 text-xs leading-4 md:leading-6 md:text-[21px] font-bold tracking-tight text-[#253F73]"><?php echo e($item->title); ?></h5>
+                            <p class="hidden md:flex mb-2 md:mb-4 font-normal text-base text-[#2B3F70]"><?php echo e($item->short_description); ?></p>
+                            <span class="publish-date-time  text-[#606F93] font-normal text-[10px] md:text-xs"><?php echo e(date('F d, Y', strtotime($item->created_at))); ?> <span class="ml-2">• Read: <?php echo e($time); ?></span></span>
 
-                        <div class="flex flex-col justify-between py-2 md:py-0 md:px-4 leading-normal">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-[#2B313B]"><?php echo e($item->title); ?></h5>
-                            <p class="mb-3 font-normal text-base text-[#6C7A93] underline"><?php echo e($item->short_description); ?></p>
-                            <span class="publish-date-time  text-[#2B313B] font-normal text-xs"><?php echo e(date('F d, Y', strtotime($item->created_at))); ?> • Read: <?php echo e($time); ?></span>
-
-                            <div class="row mt-2">
+                            <!-- <div class="row mt-2">
                               <?php $__currentLoopData = $commaSeperated_category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                             <span
@@ -58,7 +60,7 @@
                                </span>&nbsp;
 
                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </div>
+                            </div> -->
                         </div>
                     </a>
                 </li>
@@ -78,7 +80,7 @@
             <?php endif; ?>
 
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    
+            </div>
 
             <div class="btn-area flex justify-center">
                 <a href="<?php echo e($link); ?>"

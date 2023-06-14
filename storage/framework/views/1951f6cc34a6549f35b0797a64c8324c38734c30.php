@@ -1,4 +1,4 @@
-@php
+<?php
     $seo_data_sql = 'select 
                         b.id as component_id,
                         b.meta_title,
@@ -23,36 +23,36 @@ from components_shared_meta_socials a
     
     $seo_social = DB::select($seo_social_sql, [$seo_data[0]->component_id]);
     
-@endphp
-@section('meta')
+?>
+<?php $__env->startSection('meta'); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ $seo_data[0]->meta_title }} </title>
-    <meta name="description" content="{{ $seo_data[0]->meta_description }}">
-    <meta name="keywords" content="{{ $seo_data[0]->keywords }}">
+    <title><?php echo e($seo_data[0]->meta_title); ?> </title>
+    <meta name="description" content="<?php echo e($seo_data[0]->meta_description); ?>">
+    <meta name="keywords" content="<?php echo e($seo_data[0]->keywords); ?>">
 
-    @foreach ($seo_social as $social_meta)
-        @if ($social_meta->social_network == 'Facebook')
-            <meta property="og:title" content="{{ $social_meta->title }}">
-            <meta property="og:description" content="{{ $social_meta->description }}">
-            <meta property="og:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-            {{-- <meta property="og:url" content="URL of your page">
-   <meta property="og:type" content="website"> --}}
-        @else
-            <meta name="twitter:card" content="{{$social_meta->description}}">
-            <meta name="twitter:title" content="{{$social_meta->title}}">
-            <meta name="twitter:description" content="{{$social_meta->description}}">
-            <meta name="twitter:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-        @endif
-    @endforeach
+    <?php $__currentLoopData = $seo_social; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $social_meta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if($social_meta->social_network == 'Facebook'): ?>
+            <meta property="og:title" content="<?php echo e($social_meta->title); ?>">
+            <meta property="og:description" content="<?php echo e($social_meta->description); ?>">
+            <meta property="og:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+            
+        <?php else: ?>
+            <meta name="twitter:card" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:title" content="<?php echo e($social_meta->title); ?>">
+            <meta name="twitter:description" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+        <?php endif; ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-    <link rel="canonical" href="{{ $seo_data[0]->canonical_url }}">
+    <link rel="canonical" href="<?php echo e($seo_data[0]->canonical_url); ?>">
 
     <script>
-        {!! html_entity_decode($seo_data[0]->structured_data) !!}
+        <?php echo html_entity_decode($seo_data[0]->structured_data); ?>
+
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
 <div>
     <section class="hero bg-white pt-20 p-4 md:pt-12 md:p-12 md:pb-0 w-full items-center mx-auto">
         <div class="container mx-auto max-w-screen-xl">
@@ -109,7 +109,7 @@ from components_shared_meta_socials a
                     <h3 class="my-5 text-2xl text-[#2B313B] font-semibold">Result</h3>
                     <div class="flex-col sm:flex-row flex items-start sm:items-center justify-between">
 
-                        <span class="bg-[#FFF4E6] text-[#FF7800]  text-base font-normal mr-2 px-3 py-2 rounded-lg">THE RESULT IS: <strong>US€{{ $amount + $vat }}</strong> </span>
+                        <span class="bg-[#FFF4E6] text-[#FF7800]  text-base font-normal mr-2 px-3 py-2 rounded-lg">THE RESULT IS: <strong>US€<?php echo e($amount + $vat); ?></strong> </span>
 
                         <a href="/vat-calculator"
                             class="recalculate-btn text-white mt-6 sm:mt-0  bg-[#6C7A93] transition-all opacity-100 hover:opacity-90 font-bold rounded-lg text-xs px-5 py-2.5 text-center mr-2 inline-flex items-center">
@@ -123,7 +123,7 @@ from components_shared_meta_socials a
                         </a>
                     </div>
 
-                    @if ($method == 'exclude')
+                    <?php if($method == 'exclude'): ?>
                         <div class="my-6 border border-[#F5F8FF] rounded-2xl text-[#2B313B] font-normal text-xs ">
                             <table class="table-auto w-full">
                                 <tr class="border-b border-[#F5F8FF]">
@@ -134,28 +134,28 @@ from components_shared_meta_socials a
                                 </tr>
                                 <tr>
                                     <td class="p-4 m-4">Amount</td>
-                                    <td class="text-right">€{{ $amount }}</td>
+                                    <td class="text-right">€<?php echo e($amount); ?></td>
                                     <td></td>
                                     <td> </td>
                                 </tr>
                                 <tr>
                                     <td class="p-4 m-4">VAT</td>
                                     <td class="border-b-2 border-[#A4BCE6] text-right">
-                                        <span>€{{ $vat }}</span>
+                                        <span>€<?php echo e($vat); ?></span>
                                     </td>
-                                    <td class="text-right pr-6">{{ $rate }}% VAT</td>
+                                    <td class="text-right pr-6"><?php echo e($rate); ?>% VAT</td>
                                     <td> </td>
                                 </tr>
                                 <tr>
                                     <td class="p-4 m-4"><strong>Amount including VAT</strong></td>
-                                    <td class="text-right"><strong>€{{ $amount + $vat }}</strong></td>
+                                    <td class="text-right"><strong>€<?php echo e($amount + $vat); ?></strong></td>
                                     <td></td>
                                     <td> </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
-                    @elseif ($method == 'include')
+                    <?php elseif($method == 'include'): ?>
                         <div class="my-6 border border-[#F5F8FF] rounded-2xl text-[#2B313B] font-normal text-xs ">
                             <table class="table-auto w-full">
                                 <tr class="border-b border-[#F5F8FF]">
@@ -166,30 +166,30 @@ from components_shared_meta_socials a
                                 </tr>
                                 <tr>
                                     <td class="p-4 m-4">Amount</td>
-                                    <td class="text-right">€{{ $amount }}</td>
+                                    <td class="text-right">€<?php echo e($amount); ?></td>
                                     <td></td>
                                     <td> </td>
                                 </tr>
                                 <tr>
                                     <td class="p-4 m-4">VAT</td>
                                     <td class="border-b-2 border-[#A4BCE6] text-right">
-                                        <span>€{{ $vat }}</span>
+                                        <span>€<?php echo e($vat); ?></span>
                                     </td>
-                                    <td class="text-right pr-6">{{ $rate }}% VAT</td>
+                                    <td class="text-right pr-6"><?php echo e($rate); ?>% VAT</td>
                                     <td> </td>
                                 </tr>
                                 <tr>
                                     <td class="p-4 m-4"><strong>Amount excluding VAT</strong></td>
-                                    <td class="text-right"><strong>€{{ $amount - $vat }}</strong></td>
+                                    <td class="text-right"><strong>€<?php echo e($amount - $vat); ?></strong></td>
                                     <td></td>
                                     <td> </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
-                        @else
+                        <?php else: ?>
                         <script>window.location = "/vat-calculator";</script>
-                    @endif
+                    <?php endif; ?>
 
 
 
@@ -201,12 +201,13 @@ from components_shared_meta_socials a
                         <div id="load-more" class="transition-all">
                             <div  class="single-info">
 
-                                {!! html_entity_decode($details[0]->result_content) !!}
+                                <?php echo html_entity_decode($details[0]->result_content); ?>
+
 
                             </div>
                         <button id="load-more-btn" type="button"
                             class="load-btn-area w-full  inline-block transition-all scale hover:scale-105 mb-4 text-center md:hidden text-[10px] font-semibold text-center text-[#0052FE] hover:text-blue-700">
-                            View More <img src="{{asset('frontend/assets/img/icons/arrow-right-blue.svg')}}" class="ml-2 inline-block"
+                            View More <img src="<?php echo e(asset('frontend/assets/img/icons/arrow-right-blue.svg')); ?>" class="ml-2 inline-block"
                                 alt="arrow-icon">
                         </button>
                         </div>
@@ -216,7 +217,7 @@ from components_shared_meta_socials a
                             <div class="w-full lg:w-auto more-links">
                                 <h5 class="font-bold text-sm text-black mb-5">Other visitors also calculated</h5>
                                 <div class="tag-area flex-wrap flex md:flex-none">
-                                    @php
+                                    <?php
                                     $sql = 'select 
                                                 b.calculator_name,
                                                 b.link,
@@ -227,16 +228,16 @@ from components_shared_meta_socials a
                                                 left join files d on d.id = c.file_id
                                                 where a.vat_id = ?';
                                     $list = DB::select($sql,[$details[0]->id])
-                                @endphp
+                                ?>
 
-                                @foreach ($list as $item )
+                                <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     
                                
 
-                                <a target="_blank" href="{{$item->link}}"
-                                    class="text-[#0052FE] bg-white border border-[#0052FE] font-normal rounded-md transition-all text-sm px-2.5 py-1 text-center mr-2 mb-2">{{$item->calculator_name}}</a>
+                                <a target="_blank" href="<?php echo e($item->link); ?>"
+                                    class="text-[#0052FE] bg-white border border-[#0052FE] font-normal rounded-md transition-all text-sm px-2.5 py-1 text-center mr-2 mb-2"><?php echo e($item->calculator_name); ?></a>
 
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                    
                                 </div>
                             </div>
@@ -247,20 +248,20 @@ from components_shared_meta_socials a
                                                 class="flex relative">
                                                 <span
                                                     class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span><img
-                                                    class=" h-5 w-5" src="{{asset('/frontend/assets/img/social/facebook.svg')}}"
+                                                    class=" h-5 w-5" src="<?php echo e(asset('/frontend/assets/img/social/facebook.svg')); ?>"
                                                     alt=""> </span></a></li>
                                     <li class="flex ml-2"><a href="#" class=" ml-2"><img
                                                 class="blob infinity rounded-full h-5 w-5"
-                                                src="{{asset('/frontend/assets/img/social/twitter.svg')}}" alt=""> </a></li>
+                                                src="<?php echo e(asset('/frontend/assets/img/social/twitter.svg')); ?>" alt=""> </a></li>
                                     <li class="flex ml-2"> <a href="#" class=" ml-2"><span
                                                 class="flex relative">
                                                 <span
                                                     class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span><img
-                                                    class="h-5 w-5" src="{{asset('/frontend/assets/img/social/instagram.svg')}}"
+                                                    class="h-5 w-5" src="<?php echo e(asset('/frontend/assets/img/social/instagram.svg')); ?>"
                                                     alt=""></span> </a></li>
                                     <li class="flex ml-2"><a href="#" class=" ml-2"><img
                                                 class="blob infinity rounded-full h-5 w-5"
-                                                src="{{asset('/frontend/assets/img/social/youtube.svg')}}" alt=""> </a></li>
+                                                src="<?php echo e(asset('/frontend/assets/img/social/youtube.svg')); ?>" alt=""> </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -273,12 +274,68 @@ from components_shared_meta_socials a
             <!-- right-side-area-start -->
             <div class="side-bar basis-full md:basis-4/12">
                 <div class="inner-area ml-1 lg:ml-4 p-2 md:p-0">
-                    <livewire:components.vats.featured-calculators :vat="$details[0]->id" />     
-                    <livewire:components.vats.related-news />
-                    <livewire:components.vats.faq-section :vat="$details[0]->id" />
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.vats.featured-calculators', ['vat' => $details[0]->id])->html();
+} elseif ($_instance->childHasBeenRendered('l1557833002-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1557833002-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1557833002-0');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1557833002-0');
+} else {
+    $response = \Livewire\Livewire::mount('components.vats.featured-calculators', ['vat' => $details[0]->id]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1557833002-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>     
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.vats.related-news', [])->html();
+} elseif ($_instance->childHasBeenRendered('l1557833002-1')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1557833002-1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1557833002-1');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1557833002-1');
+} else {
+    $response = \Livewire\Livewire::mount('components.vats.related-news', []);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1557833002-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.vats.faq-section', ['vat' => $details[0]->id])->html();
+} elseif ($_instance->childHasBeenRendered('l1557833002-2')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1557833002-2');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1557833002-2');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1557833002-2');
+} else {
+    $response = \Livewire\Livewire::mount('components.vats.faq-section', ['vat' => $details[0]->id]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1557833002-2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 
                   
-                    <livewire:components.vats.vat-ratings :vat="$details[0]->id" />
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.vats.vat-ratings', ['vat' => $details[0]->id])->html();
+} elseif ($_instance->childHasBeenRendered('l1557833002-3')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1557833002-3');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1557833002-3');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1557833002-3');
+} else {
+    $response = \Livewire\Livewire::mount('components.vats.vat-ratings', ['vat' => $details[0]->id]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1557833002-3', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
                 </div>
             </div>
             <!-- right-side-area-end -->
@@ -357,3 +414,4 @@ from components_shared_meta_socials a
         checkSavedList('Vat Calculator');
     </script>
 </div>
+<?php /**PATH C:\Users\saleh\OneDrive\Desktop\Hassn Vai\Breken.nl\New-Design\bereken-laravel\resources\views/livewire/calculators/v-a-t/vat-result.blade.php ENDPATH**/ ?>

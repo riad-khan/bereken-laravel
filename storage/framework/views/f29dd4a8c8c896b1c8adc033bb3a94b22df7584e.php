@@ -1,4 +1,4 @@
-@php
+<?php
     $seo_data_sql = 'select 
                         b.id as component_id,
                         b.meta_title,
@@ -23,36 +23,36 @@ from components_shared_meta_socials a
     
     $seo_social = DB::select($seo_social_sql, [$seo_data[0]->component_id]);
     
-@endphp
-@section('meta')
+?>
+<?php $__env->startSection('meta'); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ $seo_data[0]->meta_title }} </title>
-    <meta name="description" content="{{ $seo_data[0]->meta_description }}">
-    <meta name="keywords" content="{{ $seo_data[0]->keywords }}">
+    <title><?php echo e($seo_data[0]->meta_title); ?> </title>
+    <meta name="description" content="<?php echo e($seo_data[0]->meta_description); ?>">
+    <meta name="keywords" content="<?php echo e($seo_data[0]->keywords); ?>">
 
-    @foreach ($seo_social as $social_meta)
-        @if ($social_meta->social_network == 'Facebook')
-            <meta property="og:title" content="{{ $social_meta->title }}">
-            <meta property="og:description" content="{{ $social_meta->description }}">
-            <meta property="og:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-            {{-- <meta property="og:url" content="URL of your page">
-   <meta property="og:type" content="website"> --}}
-        @else
-            <meta name="twitter:card" content="{{$social_meta->description}}">
-            <meta name="twitter:title" content="{{$social_meta->title}}">
-            <meta name="twitter:description" content="{{$social_meta->description}}">
-            <meta name="twitter:image" content="{{ env('STRAPI_URL') . $social_meta->url }}">
-        @endif
-    @endforeach
+    <?php $__currentLoopData = $seo_social; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $social_meta): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if($social_meta->social_network == 'Facebook'): ?>
+            <meta property="og:title" content="<?php echo e($social_meta->title); ?>">
+            <meta property="og:description" content="<?php echo e($social_meta->description); ?>">
+            <meta property="og:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+            
+        <?php else: ?>
+            <meta name="twitter:card" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:title" content="<?php echo e($social_meta->title); ?>">
+            <meta name="twitter:description" content="<?php echo e($social_meta->description); ?>">
+            <meta name="twitter:image" content="<?php echo e(env('STRAPI_URL') . $social_meta->url); ?>">
+        <?php endif; ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-    <link rel="canonical" href="{{ $seo_data[0]->canonical_url }}">
+    <link rel="canonical" href="<?php echo e($seo_data[0]->canonical_url); ?>">
 
     <script>
-        {!! html_entity_decode($seo_data[0]->structured_data) !!}
+        <?php echo html_entity_decode($seo_data[0]->structured_data); ?>
+
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
 <div>
     <section class="hero bg-white pt-20 p-4 md:pt-12 md:p-12 md:pb-4 w-full items-center mx-auto">
         <div class="container mx-auto max-w-screen-xl">
@@ -118,15 +118,15 @@ from components_shared_meta_socials a
             <div class="main-area basis-full p-2 md:p-0 md:basis-8/12">
                 <!-- left-side-area start -->
                 <div class="main-inner p-5 border border-[#F5F8FF] rounded-t-2xl">
-                    <form id="bmi_form" data-parsley-validate="" action="{{ url('/calculate-bmi') }}" method="post"
+                    <form id="bmi_form" data-parsley-validate="" action="<?php echo e(url('/calculate-bmi')); ?>" method="post"
                         enctype="multipart/form-data">
-                        @csrf
+                        <?php echo csrf_field(); ?>
                         <!-- form start -->
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
                             <div class="t-select">
                                 <span class="flex  justify-between">
                                     <label for="gender"
-                                        class="block mb-1 text-sm font-normal text-[#2B313B]">{{ $details[0]->gender_label }}</label>
+                                        class="block mb-1 text-sm font-normal text-[#2B313B]"><?php echo e($details[0]->gender_label); ?></label>
 
 
                                     <!--Code Block for white tooltip starts-->
@@ -135,7 +135,7 @@ from components_shared_meta_socials a
                                         <div x-data="{ tooltip: false }" class="relative z-30 inline-flex">
                                             <div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false"
                                                 class="cursor-pointer">
-                                                <img src="{{ asset('frontend/assets/img/icons/info-icon.svg') }}"
+                                                <img src="<?php echo e(asset('frontend/assets/img/icons/info-icon.svg')); ?>"
                                                     alt="icon">
                                             </div>
                                             <div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false"
@@ -166,7 +166,8 @@ from components_shared_meta_socials a
                                                                 </g>
                                                             </g>
                                                         </svg>
-                                                        {!! $details[0]->gender_caption !!}
+                                                        <?php echo $details[0]->gender_caption; ?>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,14 +186,21 @@ from components_shared_meta_socials a
                                         value="Female">Female</option>
                                 </select>
 
-                                @error('gender')
-                                    <span>{{ $message }}</span>
-                                @enderror
+                                <?php $__errorArgs = ['gender'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
                             <div>
                                 <span class="flex justify-between">
                                     <label for="age"
-                                        class="block mb-1  text-sm font-normal text-[#2B313B]">{{ $details[0]->age_label }}</label>
+                                        class="block mb-1  text-sm font-normal text-[#2B313B]"><?php echo e($details[0]->age_label); ?></label>
 
                                     <!--Code Block for white tooltip starts-->
 
@@ -200,7 +208,7 @@ from components_shared_meta_socials a
                                         <div x-data="{ tooltip: false }" class="relative z-30 inline-flex">
                                             <div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false"
                                                 class="cursor-pointer">
-                                                <img src="{{ asset('frontend/assets/img/icons/info-icon.svg') }}"
+                                                <img src="<?php echo e(asset('frontend/assets/img/icons/info-icon.svg')); ?>"
                                                     alt="icon">
                                             </div>
                                             <div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false"
@@ -232,7 +240,8 @@ from components_shared_meta_socials a
                                                                 </g>
                                                             </g>
                                                         </svg>
-                                                        {!! $details[0]->age_caption !!}
+                                                        <?php echo $details[0]->age_caption; ?>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -251,15 +260,22 @@ from components_shared_meta_socials a
                                     </span>
                                     <label data-parsley-errors-container="#element"></label>
                                 </div>
-                                @error('age')
-                                    <span style="color:red">*{{ $message }}</span>
-                                @enderror
+                                <?php $__errorArgs = ['age'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span style="color:red">*<?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
 
                                 <span id="age_error"></span>
                             </div>
                             <div class="">
                                 <label for="weight"
-                                    class="block mb-1  text-sm font-normal text-[#2B313B]">{{ $details[0]->weight_label }}</label>
+                                    class="block mb-1  text-sm font-normal text-[#2B313B]"><?php echo e($details[0]->weight_label); ?></label>
                                 <div class="flex single-field-wrapper">
                                     <input type="text" name="weight" id="weight" data-parsley-type="number"
                                         class="rounded-none rounded-l-md bg-white border border-r-0 border-[#F5F8FF] text-[#2B313B] font-normal text-base focus:ring-[#3b82f6] focus:outline-none focus:border-[#3b82f6] block flex-1 min-w-0 w-full p-3"
@@ -269,15 +285,22 @@ from components_shared_meta_socials a
                                         Kg
                                     </span>
                                 </div>
-                                @error('weight')
-                                    <span style="color:red">*{{ $message }}</span>
-                                @enderror
+                                <?php $__errorArgs = ['weight'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span style="color:red">*<?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
 
                                 <span id="weight_error"></span>
                             </div>
                             <div> <span class="flex justify-between">
                                     <label for="height"
-                                        class="block mb-1 text-sm font-normal text-[#2B313B]">{{ $details[0]->height_label }}</label>
+                                        class="block mb-1 text-sm font-normal text-[#2B313B]"><?php echo e($details[0]->height_label); ?></label>
 
                                     <!--Code Block for white tooltip starts-->
 
@@ -285,7 +308,7 @@ from components_shared_meta_socials a
                                         <div x-data="{ tooltip: false }" class="relative z-30 inline-flex">
                                             <div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false"
                                                 class="cursor-pointer">
-                                                <img src="{{ asset('frontend/assets/img/icons/info-icon.svg') }}"
+                                                <img src="<?php echo e(asset('frontend/assets/img/icons/info-icon.svg')); ?>"
                                                     alt="icon">
                                             </div>
                                             <div x-on:mouseover="tooltip = true" x-on:mouseleave="tooltip = false"
@@ -317,7 +340,8 @@ from components_shared_meta_socials a
                                                                 </g>
                                                             </g>
                                                         </svg>
-                                                        {!! html_entity_decode($details[0]->height_caption) !!}
+                                                        <?php echo html_entity_decode($details[0]->height_caption); ?>
+
 
                                                     </div>
                                                 </div>
@@ -335,18 +359,25 @@ from components_shared_meta_socials a
                                         Cm
                                     </span>
                                 </div>
-                                @error('height')
-                                    <span style="color:red">*{{ $message }}</span>
-                                @enderror
+                                <?php $__errorArgs = ['height'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span style="color:red">*<?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 <span id="height_error"></span>
                             </div>
                         </div>
                         <div class="sm:flex my-8">
                             <div class="sm:flex sm:items-center">
                                 <button type="submit"
-                                    class="flex bg-[#1E3062] opacity-100 hover:opacity-90 transition justify-center text-white font-bold rounded-md text-base w-full sm:w-72 px-3 py-3"><span>{{ $details[0]->button_text }}</span></button>
+                                    class="flex bg-[#1E3062] opacity-100 hover:opacity-90 transition justify-center text-white font-bold rounded-md text-base w-full sm:w-72 px-3 py-3"><span><?php echo e($details[0]->button_text); ?></span></button>
                                 <p class="my-4 sm:ml-6 text-[10px] text-[#6C7A93] font-normal">
-                                    <i>*{!! html_entity_decode($details[0]->button_details) !!} </i>
+                                    <i>*<?php echo html_entity_decode($details[0]->button_details); ?> </i>
                                 </p>
                             </div>
                         </div>
@@ -356,7 +387,21 @@ from components_shared_meta_socials a
 
                         <!-- hidden-start -->
 
-                        <livewire:components.b-m-i.bmi-details :details="$details[0]->content" />
+                        <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.b-m-i.bmi-details', ['details' => $details[0]->content])->html();
+} elseif ($_instance->childHasBeenRendered('l1538752473-0')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1538752473-0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1538752473-0');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1538752473-0');
+} else {
+    $response = \Livewire\Livewire::mount('components.b-m-i.bmi-details', ['details' => $details[0]->content]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1538752473-0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 
 
                         <!-- hidden-element end -->
@@ -365,7 +410,7 @@ from components_shared_meta_socials a
                             <div class="w-full lg:w-auto more-links">
                                 <h5 class=" font-bold text-sm text-black mb-5">Other visitors also calculated</h5>
                                 <div class="flex-wrap flex md:flex-none">
-                                    @php
+                                    <?php
                                         $sql = 'select 
                                                     b.calculator_name,
                                                     b.link,
@@ -376,16 +421,16 @@ from components_shared_meta_socials a
                                                     left join files d on d.id = c.file_id
                                                     where a.bmi_id = ?';
                                         $list = DB::select($sql,[$details[0]->id])
-                                    @endphp
+                                    ?>
 
-                                    @foreach ($list as $item )
+                                    <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         
                                    
 
-                                    <a target="_blank" href="{{$item->link}}"
-                                        class="text-[#0052FE] bg-white border border-[#0052FE] font-normal rounded-md transition-all text-sm px-2.5 py-1 text-center mr-2 mb-2">{{$item->calculator_name}}</a>
+                                    <a target="_blank" href="<?php echo e($item->link); ?>"
+                                        class="text-[#0052FE] bg-white border border-[#0052FE] font-normal rounded-md transition-all text-sm px-2.5 py-1 text-center mr-2 mb-2"><?php echo e($item->calculator_name); ?></a>
 
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                 </div>
                             </div>
@@ -397,22 +442,22 @@ from components_shared_meta_socials a
                                                 <span
                                                     class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span><img
                                                     class=" h-5 w-5"
-                                                    src="{{ asset('/frontend/assets/img/social/facebook.svg') }}"
+                                                    src="<?php echo e(asset('/frontend/assets/img/social/facebook.svg')); ?>"
                                                     alt=""> </span></a></li>
                                     <li class="flex  ml-0 md:ml-2"><a href="#" class=" ml-2"><img
                                                 class="blob infinity rounded-full h-5 w-5"
-                                                src="{{ asset('/frontend/assets/img/social/twitter.svg') }}"
+                                                src="<?php echo e(asset('/frontend/assets/img/social/twitter.svg')); ?>"
                                                 alt=""> </a></li>
                                     <li class="flex  ml-0 md:ml-2"> <a href="#" class=" ml-2"><span
                                                 class="flex relative">
                                                 <span
                                                     class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span><img
                                                     class="h-5 w-5"
-                                                    src="{{ asset('/frontend/assets/img/social/instagram.svg') }}"
+                                                    src="<?php echo e(asset('/frontend/assets/img/social/instagram.svg')); ?>"
                                                     alt=""></span> </a></li>
                                     <li class="flex  ml-0 md:ml-2"><a href="#" class=" ml-2"><img
                                                 class="blob infinity rounded-full h-5 w-5"
-                                                src="{{ asset('/frontend/assets/img/social/youtube.svg') }}"
+                                                src="<?php echo e(asset('/frontend/assets/img/social/youtube.svg')); ?>"
                                                 alt=""> </a></li>
                                 </ul>
                             </div>
@@ -425,10 +470,66 @@ from components_shared_meta_socials a
             <div class="side-bar basis-full md:basis-4/12">
                 <div class="inner-area ml-1 lg:ml-4 p-2 md:p-0">
 
-                    <livewire:components.b-m-i.featured-calculators :bmi="$details[0]->id" />
-                    <livewire:components.b-m-i.related-articles />
-                    <livewire:components.b-m-i.bmi-faq :bmi="$details[0]->id"/>
-                    <livewire:components.b-m-i.bmi-ratings />
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.b-m-i.featured-calculators', ['bmi' => $details[0]->id])->html();
+} elseif ($_instance->childHasBeenRendered('l1538752473-1')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1538752473-1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1538752473-1');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1538752473-1');
+} else {
+    $response = \Livewire\Livewire::mount('components.b-m-i.featured-calculators', ['bmi' => $details[0]->id]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1538752473-1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.b-m-i.related-articles', [])->html();
+} elseif ($_instance->childHasBeenRendered('l1538752473-2')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1538752473-2');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1538752473-2');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1538752473-2');
+} else {
+    $response = \Livewire\Livewire::mount('components.b-m-i.related-articles', []);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1538752473-2', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.b-m-i.bmi-faq', ['bmi' => $details[0]->id])->html();
+} elseif ($_instance->childHasBeenRendered('l1538752473-3')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1538752473-3');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1538752473-3');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1538752473-3');
+} else {
+    $response = \Livewire\Livewire::mount('components.b-m-i.bmi-faq', ['bmi' => $details[0]->id]);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1538752473-3', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+                    <?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('components.b-m-i.bmi-ratings', [])->html();
+} elseif ($_instance->childHasBeenRendered('l1538752473-4')) {
+    $componentId = $_instance->getRenderedChildComponentId('l1538752473-4');
+    $componentTag = $_instance->getRenderedChildComponentTagName('l1538752473-4');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('l1538752473-4');
+} else {
+    $response = \Livewire\Livewire::mount('components.b-m-i.bmi-ratings', []);
+    $html = $response->html();
+    $_instance->logRenderedChild('l1538752473-4', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 
                 </div>
             </div>
@@ -529,3 +630,4 @@ from components_shared_meta_socials a
 
 
 </div>
+<?php /**PATH C:\Users\saleh\OneDrive\Desktop\Hassn Vai\Breken.nl\New-Design\bereken-laravel\resources\views/livewire/calculators/b-m-i/bmi-calculator.blade.php ENDPATH**/ ?>

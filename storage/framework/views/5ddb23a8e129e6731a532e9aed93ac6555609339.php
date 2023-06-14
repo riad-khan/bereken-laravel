@@ -1,59 +1,55 @@
 <div>
     <div class="faq mb-3 py-2 border rounded-t-2xl border-[#F5F8FF] ">
-        <div
-            class="px-5 py-4  text-[#2B313B] mx-auto md:text-base lg:text-2xl text-2xl font-semibold">
+        <div class="px-5 py-4  text-[#2B313B] mx-auto md:text-base lg:text-2xl text-2xl font-semibold">
             Rate</div>
+        <div class="items-center font-semibold text-sm bg-white transition-all opacity-100 hover:opacity-90 px-5 py-4 ">
+            <a class="cursor-pointer " data-modal-target="authentication-modal"
+                data-modal-toggle="authentication-modal">Rate this calculation</a>
 
+            <div class="rating-star flex flex-row items-center">
 
+                <div class="flex items-center">
 
-            <div
-                class="items-center font-semibold text-sm bg-white transition-all opacity-100 hover:opacity-90 px-5 py-4 ">
-                <a class="cursor-pointer"  data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
-                    Rate this calculation
-                </a>
-
-                <div class="rating-star flex flex-row items-center">
-
-                    @php
-                    $star = round($avgRating[0]->rate);
-                    $rates = '';
-                    for ($i = 1; $i <= 5; $i++) {
-                        if ($i <= $star) {
-                            $rates .= '<svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <title>Fourth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>';
-                        } else {
-                            $rates .= '<svg aria-hidden="true" class="w-5 h-5 text-gray-300 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <title>Fifth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>';
+                    <?php
+                        $star = round($avgRating[0]->rate);
+                        $rates = '';
+                        for ($i = 1; $i <= 5; $i++) {
+                            if ($i <= $star) {
+                                $rates .= '<svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <title>Fourth star</title>
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                        </path>
+                                    </svg>';
+                            } else {
+                                $rates .= '<svg aria-hidden="true" class="w-5 h-5 text-gray-300 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <title>Fifth star</title>
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                        </path>
+                                    </svg>';
+                            }
                         }
-                    }
-                @endphp
+                    ?>
 
-               
-                    <div class="flex items-center">
-                        {!! html_entity_decode($rates) !!}
-                    </div>
-                    <p class="ml-2 text-2xl font-bold text-[#2B313B] mr-3">{{round($avgRating[0]->rate)}} </p>
-                    <a href="#" class="text-xs font-normal text-[#2B313B] hover:no-underline">
-                        {{$reviewCount[0]->total}}
-                        Reviews</a>
+                    <?php echo html_entity_decode($rates); ?>
+
                 </div>
-            </div>
+                <p class="ml-2 text-2xl font-bold text-[#2B313B] mr-3"><?php echo e(round($avgRating[0]->rate)); ?> </p>
+                <a href="#" class="text-xs font-normal text-[#2B313B] hover:no-underlinev">
+                    <?php echo e($reviewCount[0]->total); ?>
 
-            <div class="btn-area mt-3 flex justify-center">
-                <a href="#"
-                    class="btn-translate-z bg-[#112954] opacity-100 hover:opacity-90 transition text-white flex text-xs font-bold text-center justify-center items-center rounded py-4 px-2 w-full transition-all ">Need
-                    some help?</a>
+                    Reviews</a>
             </div>
+        </div>
+
+        <div class="btn-area mt-3 flex justify-center">
+            <a href="#"
+                class="btn-translate-z bg-[#112954] opacity-100 hover:opacity-90 transition text-white flex text-xs font-bold text-center justify-center items-center rounded py-4 px-2 w-full transition-all ">Need
+                some help?</a>
+        </div>
 
     </div>
 
-    {{-- Modal Code starts --}}
+    
 
 
     <!-- Main modal -->
@@ -108,7 +104,8 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                                     Ratings</label>
                                 <div class="flex">
-                                    {!! html_entity_decode($stars) !!}
+                                    <?php echo html_entity_decode($stars); ?>
+
                                 </div>
 
                                 <div id="response" class="mt-2 mb-2 text-red-500">
@@ -128,12 +125,11 @@
             </div>
         </div>
     </div>
-    {{-- Modal ends --}}
-    <script src="https://unpkg.com/flowbite@1.6.1/dist/flowbite.min.js"></script>
+    
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="{{asset('/frontend/assets/js/parsley.min.js')}}"></script>
-
+    <script src="<?php echo e(asset('/frontend/assets/js/parsley.min.js')); ?>"></script>
     <script>
         let star;
 
@@ -147,15 +143,14 @@
         }
 
         document.getElementById('btn').addEventListener('click', function(event) {
-
             event.preventDefault();
             let name = document.getElementById('name').value;
             let email = document.getElementById('email').value;
             let message = document.getElementById('message').value;
             let ratings = star;
-            let cal_id = 2;
-
+            let cal_id = 1;
             $('#rate_form').parsley().validate();
+
             axios.get('https://api.ipify.org?format=json')
                 .then((response) => {
                     const formData = {
@@ -166,7 +161,7 @@
                         cal_id: cal_id,
                         user_ip: response.data.ip,
                     }
-                    
+
 
                     if ($('#rate_form').parsley().isValid()) {
                         axios.post('/api/calculator-ratings', formData)
@@ -182,3 +177,4 @@
         })
     </script>
 </div>
+<?php /**PATH C:\Users\saleh\OneDrive\Desktop\Hassn Vai\Breken.nl\New-Design\bereken-laravel\resources\views/livewire/components/b-m-i/bmi-ratings.blade.php ENDPATH**/ ?>

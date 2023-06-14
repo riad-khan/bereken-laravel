@@ -14,7 +14,7 @@
 
                 <div class="rating-star flex flex-row items-center">
 
-                    @php
+                    <?php
                     $star = round($avgRating[0]->rate);
                     $rates = '';
                     for ($i = 1; $i <= 5; $i++) {
@@ -32,15 +32,17 @@
                             </svg>';
                         }
                     }
-                @endphp
+                ?>
 
                
                     <div class="flex items-center">
-                        {!! html_entity_decode($rates) !!}
+                        <?php echo html_entity_decode($rates); ?>
+
                     </div>
-                    <p class="ml-2 text-2xl font-bold text-[#2B313B] mr-3">{{round($avgRating[0]->rate)}} </p>
+                    <p class="ml-2 text-2xl font-bold text-[#2B313B] mr-3"><?php echo e(round($avgRating[0]->rate)); ?> </p>
                     <a href="#" class="text-xs font-normal text-[#2B313B] hover:no-underline">
-                        {{$reviewCount[0]->total}}
+                        <?php echo e($reviewCount[0]->total); ?>
+
                         Reviews</a>
                 </div>
             </div>
@@ -53,7 +55,7 @@
 
     </div>
 
-    {{-- Modal Code starts --}}
+    
 
 
     <!-- Main modal -->
@@ -108,7 +110,8 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                                     Ratings</label>
                                 <div class="flex">
-                                    {!! html_entity_decode($stars) !!}
+                                    <?php echo html_entity_decode($stars); ?>
+
                                 </div>
 
                                 <div id="response" class="mt-2 mb-2 text-red-500">
@@ -128,11 +131,11 @@
             </div>
         </div>
     </div>
-    {{-- Modal ends --}}
+    
     <script src="https://unpkg.com/flowbite@1.6.1/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="{{asset('/frontend/assets/js/parsley.min.js')}}"></script>
+    <script src="<?php echo e(asset('/frontend/assets/js/parsley.min.js')); ?>"></script>
 
     <script>
         let star;
@@ -182,3 +185,4 @@
         })
     </script>
 </div>
+<?php /**PATH C:\Users\saleh\OneDrive\Desktop\Hassn Vai\Breken.nl\New-Design\bereken-laravel\resources\views/livewire/components/vats/vat-ratings.blade.php ENDPATH**/ ?>

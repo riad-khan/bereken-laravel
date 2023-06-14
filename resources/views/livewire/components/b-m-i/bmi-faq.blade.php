@@ -1,9 +1,9 @@
 <div>
 
     <div class="faq mb-3 py-2 border rounded-t-2xl border-[#F5F8FF] ">
-        <h3 class="mx-3 py-5 border-t border-b border-[#F5F8FF] mx-auto md:text-base lg:text-2xl text-2xl font-semibold">
+        <h3 class="px-5 py-4  text-[#2B313B] mx-auto md:text-base lg:text-2xl text-2xl font-semibold">
             FAQ</h3>
-        <div class="flex justify-center items-start px-3">
+        <div class="flex justify-center items-start">
             <div class="w-full">
                 <ul class="flex flex-col">
 
@@ -15,7 +15,7 @@
  
                     <li class="" x-data="accordion({{$index}})">
                         <h4 @click="handleClick()"
-                            class="flex items-center justify-between w-full py-5 font-semibold text-sm text-left text-[#2B313B] border-b border-[#F5F8FF] cursor-pointer">
+                            class="flex items-center justify-between w-full px-5 py-4 font-semibold text-sm text-left text-[#2B313B] border-t border-[#F5F8FF] cursor-pointer">
                             <span>{{$item->question}}</span>
                             <svg :class="handleRotate()"
                                 class="fill-current text-[#2B313B] h-6 w-6 transform transition-transform duration-500 rotate-90"
@@ -26,8 +26,8 @@
                             </svg>
                         </h4>
                         <div x-ref="tab" :style="handleToggle()"
-                            class="font-normal text-sm border-b border-[#F5F8FF] overflow-hidden max-h-0 duration-500 transition-all">
-                            <p class="py-5 font-normal text-sm text-[#6C7A93]">
+                            class="font-normal text-sm border-t border-[#F5F8FF] overflow-hidden max-h-0 duration-500 transition-all">
+                            <p class="px-5 py-4 font-normal text-sm text-[#6C7A93]">
                               {{$item->answer}}
                             </p>
                         </div>

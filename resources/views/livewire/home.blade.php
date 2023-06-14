@@ -72,16 +72,16 @@
         $data = DB::select($content_sql, [$seo_data[0]->id]);
     @endphp
 
-    <section class="hero bg-[#F9FBFF] pt-20 p-4 md:pt-12 md:p-12 w-full items-center mx-auto">
+    <section class="hero bg-[#F9FBFF] pt-20 p-4 md:p-12 md:pt-[80px] w-full items-center mx-auto">
         <div class="container mx-auto max-w-screen-xl">
             <div class="sm:w-[610px] w-full mx-auto px-4">
                 <div class="flex items-center">
-                    <div class="hidden sm:flex sm:flex-none w-14">
+                    <!-- <div class="hidden sm:flex sm:flex-none w-14">
                         <img src="{{ env('STRAPI_URL') . $data[0]->left_icon }}" alt="icon">
-                    </div>
-                    <div class="grow text-center">
+                    </div> -->
+                    <div class="grow text-center mt-12 md:mt-0">
                         <h1
-                            class="text-[#2B313B] font-semibold text-[24px] sm:text-[28px] md:text-[32px] leading-[1.1]">
+                            class="text-[#1E3062] font-bold text-[24px] sm:text-[28px] md:text-[36px] leading-[1.1]">
                             {{ $data[0]->page_title }} </h1>
                     </div>
                     <div class="sm:flex sm:flex-none w-14 hidden">
@@ -90,7 +90,7 @@
                 </div>
             </div>
             <!-- search  -->
-            <div class="search-area w-full my-6">
+            <div class="search-area w-full mt-8 mb-0 md:my-6">
                 <div class="sm:w-3/4 w-full z-20 relative mx-auto bg-white rounded-2xl shadow">
                     <div class="p-6">
                         <div class="flex justify-between items-center search-top">
@@ -100,17 +100,16 @@
                                 <a class="flex justify-between items-center cursor-pointer" onclick="showSearch()"
                                     class="flex justify-between transition-all opacity-100 hover:opacity-90">
                                     <!-- <img src="{{ asset('/frontend/assets/img/save-icon.svg') }}" alt="icon"> -->
-                                    <svg class="transition" fill="#112954" width="12" height="12"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M0.799988 3.99999C0.799988 2.23268 2.23268 0.799988 3.99999 0.799988H20C21.7673 0.799988 23.2 2.23268 23.2 3.99999V20C23.2 21.7673 21.7673 23.2 20 23.2H3.99999C2.23268 23.2 0.799988 21.7673 0.799988 20V3.99999ZM18.4 5.59999H5.59999V18.4L12 15.2L18.4 18.4V5.59999Z" />
-                                    </svg>
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.1001 3.50001C2.1001 2.72681 2.7269 2.10001 3.5001 2.10001H10.5001C11.2733 2.10001 11.9001 2.72681 11.9001 3.50001V10.5C11.9001 11.2732 11.2733 11.9 10.5001 11.9H3.5001C2.7269 11.9 2.1001 11.2732 2.1001 10.5V3.50001ZM9.8001 4.20001H4.2001V9.80001L7.0001 8.40001L9.8001 9.80001V4.20001Z" fill="#26BA65"/>
+</svg>
 
-                                    <span class="text-[#26BA65] text-sm font-semibold ml-1"> Save Search</span>
+
+                                    <span class="text-[#26BA65] text-xs font-semibold ml-1"> Save Search</span>
                                 </a>
                                 <div
                                     class="show-search hidden saved-search bg-white h-auto p-4 rounded-xl shadow-md shadow-[0px 2px 20px rgba(69, 130, 220, 0.1)]">
-                                    <h3 class="color-[#2B313B] font-semibold text-base mb-2">Saved searches</h3>
+                                    <h3 class="color-[#26BA65] font-semibold text-xs mb-2">Saved searches</h3>
                                     <ul id="show-save-list">
 
                                     </ul>
